@@ -1,9 +1,9 @@
 Team members
-1. Fahad Abdulla
-2. Anurag Aryal
-3. Nasser Al-Ejail
-4. Guilherme Medeiros de Sousa
-5. Hazem Elsayed
+a. Fahad Abdulla
+b. Anurag Aryal
+c. Nasser Al-Ejail
+d. Guilherme Medeiros de Sousa
+e. Hazem Elsayed
 
 
 # ![NodeBB](public/images/sm-card.png)
