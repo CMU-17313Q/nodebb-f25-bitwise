@@ -1,3 +1,11 @@
+Team members
+a. Fahad Abdulla
+b. Anurag Aryal
+c. Nasser Al-Ejail
+d. Guilherme Medeiros de Sousa
+e. Hazem Elsayed
+
+
 # ![NodeBB](public/images/sm-card.png)
 
 ![Team Contribution Summary](https://raw.githubusercontent.com/CMU-17313Q/NodeBB/gittogether-svg/activity.svg)
