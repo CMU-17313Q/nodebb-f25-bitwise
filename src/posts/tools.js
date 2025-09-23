@@ -80,6 +80,9 @@ module.exports = function (Posts) {
 
 		await Posts.setPostField(pid, 'official', isOfficial ? 1 : 0);
 
+		// Clear cached post data to ensure updated official field is loaded
+		Posts.clearCachedPost(pid);
+
 		const plugins = require('../plugins');
 		await plugins.hooks.fire('action:post.officialToggled', {
 			pid: pid,

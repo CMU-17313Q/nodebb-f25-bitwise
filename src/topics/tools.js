@@ -352,6 +352,10 @@ module.exports = function (Topics) {
 
 		await Topics.setTopicField(tid, 'official', isOfficial ? 1 : 0);
 
+		// Clear any cached topic data
+		const cache = require('../cache');
+		cache.del(`topic:${tid}`);
+
 		await plugins.hooks.fire('action:topic.officialToggled', {
 			tid: tid,
 			uid: uid,

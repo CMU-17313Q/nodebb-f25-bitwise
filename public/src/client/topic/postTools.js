@@ -607,8 +607,10 @@ define('forum/topic/postTools', [
 						markBtn.addClass('hidden').parent().attr('hidden', '');
 						unmarkBtn.removeClass('hidden').parent().removeAttr('hidden');
 						if (badge.length === 0) {
-							const badgeHtml = '<span class="badge bg-primary rounded-1 official-post-badge" title="[[topic:official-post]]"><i class="fa fa-certificate"></i> [[topic:official]]</span>';
-							postEl.find('.post-header .d-flex.gap-1.align-items-center:first').append(badgeHtml);
+							translator.translate('[[topic:official]]', function(translated) {
+								const badgeHtml = '<span class="badge bg-primary rounded-1 official-post-badge" title="Official Post"><i class="fa fa-certificate"></i> ' + translated + '</span>';
+								postEl.find('.post-header .d-flex.gap-1.align-items-center:first').append(badgeHtml);
+							});
 						}
 					} else {
 						unmarkBtn.addClass('hidden').parent().attr('hidden', '');
