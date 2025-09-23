@@ -682,9 +682,11 @@ describe('Categories', () => {
 					'posts:history': false,
 					'posts:upvote': false,
 					'posts:downvote': false,
+					'posts:mark_official': false,
 					purge: false,
 					'posts:view_deleted': false,
 					moderate: false,
+					'topics:mark_official': false,
 				});
 
 				done();
