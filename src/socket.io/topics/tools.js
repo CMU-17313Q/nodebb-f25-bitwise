@@ -38,4 +38,28 @@ module.exports = function (SocketTopics) {
 
 		await topics.tools.orderPinnedTopics(socket.uid, data);
 	};
+
+	SocketTopics.markOfficial = async function (socket, data) {
+		if (!data || !data.tid) {
+			throw new Error('[[error:invalid-data]]');
+		}
+		const api = require('../../api');
+		return await api.topics.markOfficial(socket, data);
+	};
+
+	SocketTopics.unmarkOfficial = async function (socket, data) {
+		if (!data || !data.tid) {
+			throw new Error('[[error:invalid-data]]');
+		}
+		const api = require('../../api');
+		return await api.topics.unmarkOfficial(socket, data);
+	};
+
+	SocketTopics.toggleOfficial = async function (socket, data) {
+		if (!data || !data.tid) {
+			throw new Error('[[error:invalid-data]]');
+		}
+		const api = require('../../api');
+		return await api.topics.toggleOfficial(socket, data);
+	};
 };
