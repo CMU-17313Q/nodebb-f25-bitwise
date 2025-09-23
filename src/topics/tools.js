@@ -313,4 +313,57 @@ module.exports = function (Topics) {
 			db.sortedSetAdd(set, timestamp, tid),
 		]);
 	};
+
+	topicTools.markOfficial = async function (tid, uid) {
+		return await toggleOfficial(tid, uid, true);
+	};
+
+	topicTools.unmarkOfficial = async function (tid, uid) {
+		return await toggleOfficial(tid, uid, false);
+	};
+
+	topicTools.toggleOfficial = async function (tid, uid) {
+		const topicData = await Topics.getTopicData(tid);
+		if (!topicData) {
+			throw new Error('[[error:no-topic]]');
+		}
+		return await toggleOfficial(tid, uid, !topicData.official);
+	};
+
+	async function toggleOfficial(tid, uid, isOfficial) {
+		const [topicData, canMarkOfficial] = await Promise.all([
+			Topics.getTopicData(tid),
+			privileges.topics.canMarkOfficial(tid, uid),
+		]);
+
+		if (!topicData) {
+			throw new Error('[[error:no-topic]]');
+		}
+
+		if (topicData.official && isOfficial) {
+			throw new Error('[[error:topic-already-official]]');
+		} else if (!topicData.official && !isOfficial) {
+			throw new Error('[[error:topic-not-official]]');
+		}
+
+		if (!canMarkOfficial) {
+			throw new Error('[[error:no-privileges]]');
+		}
+
+		await Topics.setTopicField(tid, 'official', isOfficial ? 1 : 0);
+
+		await plugins.hooks.fire('action:topic.officialToggled', {
+			tid: tid,
+			uid: uid,
+			official: isOfficial,
+		});
+
+		topicData.events = await Topics.events.log(tid, {
+			type: isOfficial ? 'mark-official' : 'unmark-official',
+			uid: uid
+		});
+
+		topicData.official = isOfficial;
+		return topicData;
+	}
 };

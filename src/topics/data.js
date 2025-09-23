@@ -13,7 +13,7 @@ const intFields = [
 	'viewcount', 'postercount', 'followercount',
 	'deleted', 'locked', 'pinned', 'pinExpiry',
 	'timestamp', 'upvotes', 'downvotes',
-	'lastposttime', 'deleterUid',
+	'lastposttime', 'deleterUid', 'official',
 ];
 
 module.exports = function (Topics) {
