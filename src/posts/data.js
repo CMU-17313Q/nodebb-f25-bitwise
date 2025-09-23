@@ -70,8 +70,8 @@ function modifyPost(post, fields) {
 		if (!fields.length || fields.includes('attachments')) {
 			post.attachments = (post.attachments || '').split(',').filter(Boolean);
 		}
-		// Ensure official field is present with default value when requested
-		if ((fields.includes('official') || !fields.length) && !post.hasOwnProperty('official')) {
+		// Ensure official field is always present with default value
+		if (!post.hasOwnProperty('official')) {
 			post.official = 0;
 		}
 	}
