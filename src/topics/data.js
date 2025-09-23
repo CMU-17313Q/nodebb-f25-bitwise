@@ -140,4 +140,9 @@ function modifyTopic(topic, fields) {
 			};
 		});
 	}
+
+	// Ensure official field is always present with default value
+	if (!topic.hasOwnProperty('official')) {
+		topic.official = 0;
+	}
 }

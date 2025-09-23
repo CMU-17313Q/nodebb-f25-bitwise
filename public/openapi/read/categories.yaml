@@ -118,6 +118,9 @@ get:
                                             cid:
                                               type: number
                                               description: A category identifier
+                                            official:
+                                              type: number
+                                              description: Whether this post is marked as official (1) or not (0)
                                             topic:
                                               type: object
                                               properties:
@@ -187,6 +190,9 @@ get:
                                   cid:
                                     type: number
                                     description: A category identifier
+                                  official:
+                                    type: number
+                                    description: Whether this post is marked as official (1) or not (0)
                                   topic:
                                     type: object
                                     properties:
