@@ -11,9 +11,8 @@ module.exports = {
 
 		await batch.processSortedSet('posts:pid', async (pids) => {
 			progress.incr(pids.length);
-			const posts = pids.map(pid => `post:${pid}`);
-			const updates = posts.map(key => ({ key, official: 0 }));
-			await db.setObjectBulk(updates);
+			const bulkSet = pids.map(pid => [`post:${pid}`, { official: 0 }]);
+			await db.setObjectBulk(bulkSet);
 		}, {
 			batch: 500,
 			progress: progress,
@@ -21,9 +20,8 @@ module.exports = {
 
 		await batch.processSortedSet('topics:tid', async (tids) => {
 			progress.incr(tids.length);
-			const topics = tids.map(tid => `topic:${tid}`);
-			const updates = topics.map(key => ({ key, official: 0 }));
-			await db.setObjectBulk(updates);
+			const bulkSet = tids.map(tid => [`topic:${tid}`, { official: 0 }]);
+			await db.setObjectBulk(bulkSet);
 		}, {
 			batch: 500,
 			progress: progress,
