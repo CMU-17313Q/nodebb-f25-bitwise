@@ -364,7 +364,7 @@ module.exports = function (Topics) {
 
 		topicData.events = await Topics.events.log(tid, {
 			type: isOfficial ? 'mark-official' : 'unmark-official',
-			uid: uid
+			uid: uid,
 		});
 
 		topicData.official = isOfficial;

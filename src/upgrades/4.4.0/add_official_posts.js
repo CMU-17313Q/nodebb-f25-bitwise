@@ -7,7 +7,7 @@ module.exports = {
 	name: 'Add official field to posts and topics',
 	timestamp: Date.UTC(2025, 0, 1),
 	method: async function () {
-		const progress = this.progress;
+		const { progress } = this;
 
 		await batch.processSortedSet('posts:pid', async (pids) => {
 			progress.incr(pids.length);
@@ -31,11 +31,11 @@ module.exports = {
 		const cids = await db.getSortedSetRange('categories:cid', 0, -1);
 		const privileges = ['posts:mark_official', 'topics:mark_official'];
 
-		for (const privilege of privileges) {
+		// Process privileges in parallel to avoid await in loop
+		await Promise.all(privileges.map(async (privilege) => {
 			// Grant to administrators by default
-			await Promise.all(cids.map(cid =>
-				db.setAdd(`cid:${cid}:privileges:${privilege}`, 'administrators')
-			));
-		}
+			return Promise.all(cids.map(cid =>
+				db.setAdd(`cid:${cid}:privileges:${privilege}`, 'administrators')));
+		}));
 	},
 };
