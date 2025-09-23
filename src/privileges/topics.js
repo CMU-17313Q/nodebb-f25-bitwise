@@ -206,3 +206,14 @@ privsTopics.canViewDeletedScheduled = function (topic, privileges = {}, viewDele
 
 	return true;
 };
+
+privsTopics.canMarkOfficial = async function (tid, uid) {
+	const cid = await topics.getTopicField(tid, 'cid');
+	const results = await Promise.all([
+		privsCategories.isUserAllowedTo('topics:mark_official', cid, uid),
+		user.isAdministrator(uid),
+		user.isModerator(uid, cid),
+	]);
+
+	return results[0] || results[1] || results[2];
+};

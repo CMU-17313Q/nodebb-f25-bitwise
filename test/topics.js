@@ -422,8 +422,10 @@ describe('Topic\'s', () => {
 		it('should get a single field', (done) => {
 			topics.getTopicFields(newTopic.tid, ['slug'], (err, data) => {
 				assert.ifError(err);
-				assert(Object.keys(data).length === 1);
+				assert(Object.keys(data).length === 2);
 				assert(data.hasOwnProperty('slug'));
+				assert(data.hasOwnProperty('official'));
+				assert.equal(data.official, 0);
 				done();
 			});
 		});

@@ -83,6 +83,15 @@
 	"view-flag-report": "View Flag Report",
 	"resolve-flag": "Resolve Flag",
 
+	"official": "Official",
+	"official-post": "Official Post",
+	"official-topic": "Official Topic",
+	"mark-official": "Mark as Official",
+	"unmark-official": "Remove Official Status",
+	"toggle-official": "Toggle Official Status",
+	"post-mark-official-confirm": "Are you sure you want to mark this post as official?",
+	"post-unmark-official-confirm": "Are you sure you want to remove the official status from this post?",
+
 	"merged-message": "This topic has been merged into <a href=\"%1\">%2</a>",
 	"forked-message": "This topic was forked from <a href=\"%1\">%2</a>",
 	"deleted-message": "This topic has been deleted. Only users with topic management privileges can see it.",

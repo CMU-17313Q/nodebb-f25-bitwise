@@ -40,6 +40,8 @@
 	"delete-topics": "Delete Topics",
 	"purge": "Purge",
 	"moderate": "Moderate",
+	"mark-posts-official": "Mark Posts as Official",
+	"mark-topics-official": "Mark Topics as Official",
 	"admin-dashboard": "Dashboard",
 	"admin-categories": "Categories",
 	"admin-privileges": "Privileges",

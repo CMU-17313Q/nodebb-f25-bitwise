@@ -13,7 +13,7 @@ const intFields = [
 	'viewcount', 'postercount', 'followercount',
 	'deleted', 'locked', 'pinned', 'pinExpiry',
 	'timestamp', 'upvotes', 'downvotes',
-	'lastposttime', 'deleterUid',
+	'lastposttime', 'deleterUid', 'official',
 ];
 
 module.exports = function (Topics) {
@@ -139,5 +139,10 @@ function modifyTopic(topic, fields) {
 				class: escaped.replace(/\s/g, '-'),
 			};
 		});
+	}
+
+	// Ensure official field is always present with default value
+	if (!topic.hasOwnProperty('official')) {
+		topic.official = 0;
 	}
 }

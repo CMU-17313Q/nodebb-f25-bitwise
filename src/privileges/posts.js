@@ -238,6 +238,17 @@ privsPosts.canPurge = async function (pid, uid) {
 	return (results.purge && (results.owner || results.isModerator)) || results.isAdmin;
 };
 
+privsPosts.canMarkOfficial = async function (pid, uid) {
+	const cid = await posts.getCidByPid(pid);
+	const results = await utils.promiseParallel({
+		markOfficial: privsCategories.isUserAllowedTo('posts:mark_official', cid, uid),
+		isAdmin: user.isAdministrator(uid),
+		isModerator: user.isModerator(uid, cid),
+	});
+
+	return results.markOfficial || results.isAdmin || results.isModerator;
+};
+
 async function isAdminOrMod(pid, uid) {
 	if (parseInt(uid, 10) <= 0) {
 		return false;

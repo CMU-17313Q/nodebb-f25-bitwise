@@ -56,6 +56,12 @@
 				<span class="badge bg-danger rounded-1">[[user:banned]]</span>
 				{{{ end }}}
 
+				{{{ if posts.official }}}
+				<span class="badge bg-primary rounded-1 official-post-badge" title="[[topic:official-post]]">
+					<i class="fa fa-certificate"></i> [[topic:official]]
+				</span>
+				{{{ end }}}
+
 				<div class="d-flex gap-1 align-items-center">
 					<span class="text-muted">{generateWrote(@value, config.timeagoCutoff)}</span>
 

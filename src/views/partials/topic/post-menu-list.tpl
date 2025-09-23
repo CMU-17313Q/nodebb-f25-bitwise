@@ -24,6 +24,19 @@
 </li>
 {{{ end }}}
 
+{{{ if posts.display_official_tools }}}
+<li {{{ if posts.official }}}hidden{{{ end }}}>
+	<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" component="post/mark-official" role="menuitem" href="#" class="{{{ if posts.official }}}hidden{{{ end }}}">
+		<span class="menu-icon"><i class="fa fa-fw text-secondary fa-certificate"></i></span> [[topic:mark-official]]
+	</a>
+</li>
+<li {{{ if !posts.official }}}hidden{{{ end }}}>
+	<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" component="post/unmark-official" role="menuitem" href="#" class="{{{ if !posts.official }}}hidden{{{ end }}}">
+		<span class="menu-icon"><i class="fa fa-fw text-secondary fa-certificate"></i></span> [[topic:unmark-official]]
+	</a>
+</li>
+{{{ end }}}
+
 {{{ if posts.display_move_tools }}}
 <li>
 	<a class="dropdown-item rounded-1 d-flex align-items-center gap-2" component="post/move" role="menuitem" href="#">

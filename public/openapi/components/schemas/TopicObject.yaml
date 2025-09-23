@@ -256,6 +256,9 @@ TopicObjectSlim:
           type: number
         votes:
           type: number
+        official:
+          type: number
+          description: Whether this topic is marked as official (1) or not (0)
         teaserPid:
           oneOf:
             - type: number
