@@ -34,6 +34,9 @@ PostObject:
       type: number
     votes:
       type: number
+    official:
+      type: number
+      description: Whether this post is marked as official (1) or not (0)
     timestampISO:
       type: string
       description: An ISO 8601 formatted date string (complementing `timestamp`)
@@ -120,6 +123,9 @@ PostObject:
           type: array
           items:
             $ref: ../../components/schemas/TagObject.yaml#/TagObject
+        official:
+          type: number
+          description: Whether this topic is marked as official (1) or not (0)
       required:
         - uid
         - tid
@@ -174,6 +180,9 @@ PostDataObject:
           type: number
         votes:
           type: number
+        official:
+          type: number
+          description: Whether this post is marked as official (1) or not (0)
         deleted:
           type: number
         upvotes:

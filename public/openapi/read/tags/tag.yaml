@@ -197,6 +197,9 @@ get:
                                   example: "#f44336"
                             index:
                               type: number
+                            official:
+                              type: number
+                              description: Whether this post is marked as official (1) or not (0)
                         tags:
                           type: array
                           items:
