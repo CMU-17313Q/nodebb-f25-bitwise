@@ -7,7 +7,7 @@ const utils = require('../utils');
 const intFields = [
 	'uid', 'pid', 'tid', 'deleted', 'timestamp',
 	'upvotes', 'downvotes', 'deleterUid', 'edited',
-	'replies', 'bookmarks', 'announces',
+	'replies', 'bookmarks', 'announces', 'official',
 ];
 
 module.exports = function (Posts) {
@@ -69,6 +69,10 @@ function modifyPost(post, fields) {
 		}
 		if (!fields.length || fields.includes('attachments')) {
 			post.attachments = (post.attachments || '').split(',').filter(Boolean);
+		}
+		// Ensure official field is always present with default value
+		if (!post.hasOwnProperty('official')) {
+			post.official = 0;
 		}
 	}
 }
