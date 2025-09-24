@@ -35,6 +35,7 @@ const _privilegeMap = new Map([
 	['purge', { label: '[[admin/manage/privileges:purge]]', type: 'moderation' }],
 	['moderate', { label: '[[admin/manage/privileges:moderate]]', type: 'moderation' }],
 	['posts:mark_official', { label: '[[admin/manage/privileges:mark-posts-official]]', type: 'moderation' }],
+	['topics:mark_official', { label: '[[admin/manage/privileges:mark-topics-official]]', type: 'moderation' }],
 ]);
 
 privsCategories.init = async () => {
