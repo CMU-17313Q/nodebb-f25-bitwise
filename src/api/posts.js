@@ -653,6 +653,68 @@ async function logQueueEvent(caller, result, type) {
 	await events.log(eventData);
 }
 
+postsAPI.markOfficial = async function (caller, data) {
+	if (!data || !data.pid) {
+		throw new Error('[[error:invalid-data]]');
+	}
+	const result = await posts.tools.markOfficial(caller.uid, data.pid);
+	await events.log({
+		type: 'post-mark-official',
+		uid: caller.uid,
+		ip: caller.ip,
+		pid: data.pid,
+	});
+
+	websockets.in(`topic_${result.tid}`).emit('event:post_updated', {
+		post: result,
+	});
+
+	return result;
+};
+
+postsAPI.unmarkOfficial = async function (caller, data) {
+	if (!data || !data.pid) {
+		throw new Error('[[error:invalid-data]]');
+	}
+
+	const result = await posts.tools.unmarkOfficial(caller.uid, data.pid);
+
+	await events.log({
+		type: 'post-unmark-official',
+		uid: caller.uid,
+		ip: caller.ip,
+		pid: data.pid,
+	});
+
+	websockets.in(`topic_${result.tid}`).emit('event:post_updated', {
+		post: result,
+	});
+
+	return result;
+};
+
+postsAPI.toggleOfficial = async function (caller, data) {
+	if (!data || !data.pid) {
+		throw new Error('[[error:invalid-data]]');
+	}
+
+	const result = await posts.tools.toggleOfficial(caller.uid, data.pid);
+
+	await events.log({
+		type: result.official ? 'post-mark-official' : 'post-unmark-official',
+		uid: caller.uid,
+		ip: caller.ip,
+		pid: data.pid,
+	});
+
+	websockets.in(`topic_${result.tid}`).emit('event:post_updated', {
+		post: result,
+	});
+
+	return result;
+};
+
+
 async function sendQueueNotification(type, targetUid, path, notificationText) {
 	const bodyShort = notificationText ?
 		translator.compile(`notifications:${type}`, notificationText) :

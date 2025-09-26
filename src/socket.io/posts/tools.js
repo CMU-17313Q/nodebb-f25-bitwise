@@ -19,7 +19,7 @@ module.exports = function (SocketPosts) {
 		}
 		const cid = await posts.getCidByPid(data.pid);
 		const results = await utils.promiseParallel({
-			posts: posts.getPostFields(data.pid, ['deleted', 'bookmarks', 'uid', 'ip', 'flagId', 'url']),
+			posts: posts.getPostFields(data.pid, ['deleted', 'bookmarks', 'uid', 'ip', 'flagId', 'url', 'official']),
 			isAdmin: user.isAdministrator(socket.uid),
 			isGlobalMod: user.isGlobalModerator(socket.uid),
 			isModerator: user.isModerator(socket.uid, cid),
@@ -28,6 +28,7 @@ module.exports = function (SocketPosts) {
 			canPurge: privileges.posts.canPurge(data.pid, socket.uid),
 			canFlag: privileges.posts.canFlag(data.pid, socket.uid),
 			canViewHistory: privileges.posts.can('posts:history', data.pid, socket.uid),
+			canMarkOfficial: privileges.posts.canMarkOfficial(data.pid, socket.uid),
 			flagged: flags.exists('post', data.pid, socket.uid), // specifically, whether THIS calling user flagged
 			bookmarked: posts.hasBookmarked(data.pid, socket.uid),
 			postSharing: social.getActivePostSharing(),
@@ -51,6 +52,7 @@ module.exports = function (SocketPosts) {
 		postData.display_ip_ban = (results.isAdmin || results.isGlobalMod) && !postData.selfPost;
 		postData.display_history = results.history && results.canViewHistory;
 		postData.display_original_url = !utils.isNumber(data.pid);
+		postData.display_official_tools = results.canMarkOfficial;
 		postData.flags = {
 			flagId: parseInt(results.posts.flagId, 10) || null,
 			can: results.canFlag.flag,
@@ -126,4 +128,27 @@ module.exports = function (SocketPosts) {
 			throw new Error('[[error:no-privileges]]');
 		}
 	}
+	SocketPosts.markOfficial = async function (socket, data) {
+		if (!data || !data.pid) {
+			throw new Error('[[error:invalid-data]]');
+		}
+		const api = require('../../api');
+		return await api.posts.markOfficial(socket, data);
+	};
+
+	SocketPosts.unmarkOfficial = async function (socket, data) {
+		if (!data || !data.pid) {
+			throw new Error('[[error:invalid-data]]');
+		}
+		const api = require('../../api');
+		return await api.posts.unmarkOfficial(socket, data);
+	};
+
+	SocketPosts.toggleOfficial = async function (socket, data) {
+		if (!data || !data.pid) {
+			throw new Error('[[error:invalid-data]]');
+		}
+		const api = require('../../api');
+		return await api.posts.toggleOfficial(socket, data);
+	};
 };
