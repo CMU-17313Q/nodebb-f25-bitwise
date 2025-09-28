@@ -255,6 +255,15 @@ define('forum/topic/postTools', [
 			purgePost($(this));
 		});
 
+		
+		postContainer.on('click', '[component="post/mark-official"]', function () {
+			togglePostOfficial($(this), true);
+		});
+
+		postContainer.on('click', '[component="post/unmark-official"]', function () {
+			togglePostOfficial($(this), false);
+		});
+		
 		postContainer.on('click', '[component="post/move"]', function () {
 			const btn = $(this);
 			require(['forum/topic/move-post'], function (movePost) {
@@ -613,6 +622,6 @@ define('forum/topic/postTools', [
 			});
 		});
 	}
-	
+
 	return PostTools;
 });
