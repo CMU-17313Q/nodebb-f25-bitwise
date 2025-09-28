@@ -29,10 +29,10 @@
         "NODEBB_DB": "redis",
         "NODEBB_REDIS_HOST": "localhost",
         "NODEBB_REDIS_PORT": "6379",
-        "NODEBB_REDIS_PASSWORD": "",
+        "NODEBB_REDIS_PASSWORD": "bitwise",
         "NODEBB_REDIS_DB": "0",
-        "NODEBB_ADMIN_USERNAME": "admin",
-        "NODEBB_ADMIN_PASSWORD": "password123!",
-        "NODEBB_ADMIN_EMAIL": "admin@admin.admin"
+        "NODEBB_ADMIN_USERNAME": "bitwise",
+        "NODEBB_ADMIN_PASSWORD": "bitwise",
+        "NODEBB_ADMIN_EMAIL": "aryalanurag15319@gmail.com"
     }
 }
