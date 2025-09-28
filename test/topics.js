@@ -425,7 +425,7 @@ describe('Topic\'s', () => {
 				assert(Object.keys(data).length === 2);
 				assert(data.hasOwnProperty('slug'));
 				assert(data.hasOwnProperty('official'));
-				assert.equal(data.official, 0);				
+				assert.equal(data.official, 0);
 				done();
 			});
 		});
