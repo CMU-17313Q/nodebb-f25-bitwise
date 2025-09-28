@@ -356,4 +356,67 @@ topicsAPI.move = async (caller, { tid, cid }) => {
 	}, { batch: 10 });
 
 	await categories.onTopicsMoved(cids);
+
+	topicsAPI.markOfficial = async function (caller, data) {
+		if (!data || !data.tid) {
+			throw new Error('[[error:invalid-data]]');
+		}
+
+		const result = await topics.tools.markOfficial(data.tid, caller.uid);
+
+		await events.log({
+			type: 'topic-mark-official',
+			uid: caller.uid,
+			ip: caller.ip,
+			tid: data.tid,
+		});
+
+		websockets.in(`topic_${data.tid}`).emit('event:topic_updated', {
+			topic: result,
+		});
+
+		return result;
+	};
+
+	topicsAPI.unmarkOfficial = async function (caller, data) {
+		if (!data || !data.tid) {
+			throw new Error('[[error:invalid-data]]');
+		}
+
+		const result = await topics.tools.unmarkOfficial(data.tid, caller.uid);
+
+		await events.log({
+			type: 'topic-unmark-official',
+			uid: caller.uid,
+			ip: caller.ip,
+			tid: data.tid,
+		});
+
+		websockets.in(`topic_${data.tid}`).emit('event:topic_updated', {
+			topic: result,
+		});
+
+		return result;
+	};
+
+	topicsAPI.toggleOfficial = async function (caller, data) {
+		if (!data || !data.tid) {
+			throw new Error('[[error:invalid-data]]');
+		}
+
+		const result = await topics.tools.toggleOfficial(data.tid, caller.uid);
+
+		await events.log({
+			type: result.official ? 'topic-mark-official' : 'topic-unmark-official',
+			uid: caller.uid,
+			ip: caller.ip,
+			tid: data.tid,
+		});
+
+		websockets.in(`topic_${data.tid}`).emit('event:topic_updated', {
+			topic: result,
+		});
+
+		return result;
+	};
 };
