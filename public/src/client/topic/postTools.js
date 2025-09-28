@@ -255,6 +255,15 @@ define('forum/topic/postTools', [
 			purgePost($(this));
 		});
 
+		
+		postContainer.on('click', '[component="post/mark-official"]', function () {
+			togglePostOfficial($(this), true);
+		});
+
+		postContainer.on('click', '[component="post/unmark-official"]', function () {
+			togglePostOfficial($(this), false);
+		});
+		
 		postContainer.on('click', '[component="post/move"]', function () {
 			const btn = $(this);
 			require(['forum/topic/move-post'], function (movePost) {
@@ -571,6 +580,47 @@ define('forum/topic/postTools', [
 				left: tooltipWidth > lastRect.width ? lastRect.left : lastRect.left + lastRect.width - tooltipWidth,
 			});
 		}
+	}
+
+	function togglePostOfficial(button, markAsOfficial) {
+		const pid = getData(button, 'data-pid');
+		const postEl = components.get('post', 'pid', pid);
+		const action = markAsOfficial ? 'markOfficial' : 'unmarkOfficial';
+		const confirmKey = markAsOfficial ? 'mark-official-confirm' : 'unmark-official-confirm';
+
+		translator.translate('[[topic:post-' + confirmKey + ']]').then(function (translated) {
+			bootbox.confirm(translated, function (confirm) {
+				if (!confirm) {
+					return;
+				}
+
+				socket.emit('posts.' + action, { pid: pid }, function (err) {
+					if (err) {
+						return alerts.error(err.message);
+					}
+
+					// Update the UI
+					const markBtn = postEl.find('[component="post/mark-official"]');
+					const unmarkBtn = postEl.find('[component="post/unmark-official"]');
+					const badge = postEl.find('.official-post-badge');
+
+					if (markAsOfficial) {
+						markBtn.addClass('hidden').parent().attr('hidden', '');
+						unmarkBtn.removeClass('hidden').parent().removeAttr('hidden');
+						if (badge.length === 0) {
+							translator.translate('[[topic:official]]', function (translated) {
+								const badgeHtml = '<span class="badge bg-primary rounded-1 official-post-badge" title="Official Post"><i class="fa fa-certificate"></i> ' + translated + '</span>';
+								postEl.find('.post-header .d-flex.gap-1.align-items-center:first').append(badgeHtml);
+							});
+						}
+					} else {
+						unmarkBtn.addClass('hidden').parent().attr('hidden', '');
+						markBtn.removeClass('hidden').parent().removeAttr('hidden');
+						badge.remove();
+					}
+				});
+			});
+		});
 	}
 
 	return PostTools;

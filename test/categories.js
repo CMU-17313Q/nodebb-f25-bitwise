@@ -682,9 +682,11 @@ describe('Categories', () => {
 					'posts:history': false,
 					'posts:upvote': false,
 					'posts:downvote': false,
+					'posts:mark_official': false,
 					purge: false,
 					'posts:view_deleted': false,
 					moderate: false,
+					'topics:mark_official': false,
 				});
 
 				done();
@@ -727,11 +729,13 @@ describe('Categories', () => {
 					'groups:posts:history': true,
 					'groups:posts:upvote': true,
 					'groups:posts:downvote': true,
+					'groups:posts:mark_official': false,
 					'groups:topics:delete': false,
 					'groups:topics:create': true,
 					'groups:topics:reply': true,
 					'groups:topics:tag': true,
 					'groups:topics:schedule': false,
+					'groups:topics:mark_official': false,
 					'groups:posts:delete': true,
 					'groups:read': true,
 					'groups:topics:read': true,

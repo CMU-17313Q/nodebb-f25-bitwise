@@ -164,10 +164,12 @@
 
 	"post-already-deleted": "This post has already been deleted",
 	"post-already-restored": "This post has already been restored",
-
+	"post-already-official": "This post is already marked as official",
+	"post-not-official": "This post is not marked as official",
 	"topic-already-deleted": "This topic has already been deleted",
 	"topic-already-restored": "This topic has already been restored",
-
+	"topic-already-official": "This topic is already marked as official",
+	"topic-not-official": "This topic is not marked as official",
 	"cant-purge-main-post": "You can't purge the main post, please delete the topic instead",
 
 	"topic-thumbnails-are-disabled": "Topic thumbnails are disabled.",
