@@ -12,6 +12,22 @@ const translator = require('../translator');
 const utils = require('../utils');
 const postCache = require('./cache');
 
+const colorTagRegex = /[color=([^\]]+)\]([\s\S]*?)[/color]/gi;
+const validHexColor = /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i;
+const allowedNamedColors = new Map([
+    ['red', '#d92b2b'],
+    ['orange', '#e96310'],
+    ['yellow', '#e5b70a'],
+    ['green', '#1f9d55'],
+    ['teal', '#1aa39a'],
+    ['blue', '#2474b5'],
+    ['indigo', '#5856d6'],
+    ['purple', '#a32cc4'],
+    ['pink', '#d63384'],
+    ['gray', '#6c757d'],
+    ['black', '#111111'],
+]);
+
 let sanitizeConfig = {
 	allowedTags: sanitize.defaults.allowedTags.concat([
 		// Some safe-to-use tags to add
@@ -34,6 +50,44 @@ let sanitizeConfig = {
 	],
 };
 const allowedTypes = new Set(['default', 'plaintext', 'activitypub.note', 'activitypub.article', 'markdown']);
+
+function normalizeColorToken(raw) {
+    if (!raw) {
+        return null;
+    }
+    const trimmed = String(raw).trim().toLowerCase();
+    if (allowedNamedColors.has(trimmed)) {
+        return {
+            attr: trimmed,
+            css: allowedNamedColors.get(trimmed),
+        };
+    }
+    if (validHexColor.test(trimmed)) {
+        return {
+            attr: trimmed,
+            css: trimmed,
+        };
+    }
+    return null;
+}
+
+function renderTextColorTokens(content) {
+    if (!content || typeof content !== 'string' || content.indexOf('[color=') === -1) {
+        return content;
+    }
+    return replaceRecursive(content);
+
+    function replaceRecursive(input) {
+        return input.replace(colorTagRegex, (match, rawColor, inner) => {
+            const normalized = normalizeColorToken(rawColor);
+            if (!normalized) {
+                return replaceRecursive(inner);
+            }
+            const innerContent = replaceRecursive(inner);
+            return `<span class="nbb-text-color" data-color="${normalized.attr}" style="color: ${normalized.css};">${innerContent}</span>`;
+        });
+    }
+}
 
 module.exports = function (Posts) {
 	Posts.urlRegex = /href="([^"]+)"/g;
@@ -139,6 +193,21 @@ module.exports = function (Posts) {
 	};
 
 	Posts.registerHooks = () => {
+        plugins.hooks.register('core', {
+            hook: 'filter:parse.post',
+            priority: 6,
+            method: async (data) => {
+                data.postData.content = renderTextColorTokens(data.postData.content);
+                return data;
+            },
+        });
+
+        plugins.hooks.register('core', {
+            hook: 'filter:parse.raw',
+            priority: 6,
+            method: async content => renderTextColorTokens(content),
+        });
+
 		plugins.hooks.register('core', {
 			hook: 'filter:parse.post',
 			method: async (data) => {
