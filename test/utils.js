@@ -57,7 +57,7 @@ describe('Utility Methods', () => {
 	describe('username validation', () => {
 		it('rejects latin-1 characters', () => {
 			const username = "John\"'-. Doeäâèéë1234";
-			assert(utils.isUserNameValid(username), false);
+			assert.equal(utils.isUserNameValid(username), false);
 		});
 
 		it('rejects empty string', () => {
@@ -79,7 +79,7 @@ describe('Utility Methods', () => {
 
 		it('rejects square brackets', () => {
 			const username = '[best clan] julian';
-			assert(utils.isUserNameValid(username), false);
+			assert.equal(utils.isUserNameValid(username), false);
 		});
 
 		it('accepts regular username', () => {
@@ -91,7 +91,7 @@ describe('Utility Methods', () => {
 		});
 
 		it('rejects quotes', () => {
-			assert(utils.isUserNameValid('baris "the best" usakli'), false);
+			assert.equal(utils.isUserNameValid('baris "the best" usakli'), false);
 		});
 	});
 
