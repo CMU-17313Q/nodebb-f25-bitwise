@@ -1,7 +1,7 @@
 'use strict';
 
 
-define('forum/compose', ['hooks'], function (hooks) {
+define('forum/compose', ['hooks', 'forum/composer/text-color'], function (hooks) {
 	const Compose = {};
 
 	Compose.init = function () {

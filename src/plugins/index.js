@@ -10,6 +10,7 @@ const chalk = require('chalk');
 const request = require('../request');
 const user = require('../user');
 const posts = require('../posts');
+const registerComposerFormatting = require('../composer/formatting');
 
 const { pluginNamePattern, themeNamePattern, paths } = require('../constants');
 
@@ -124,6 +125,7 @@ Plugins.reload = async function () {
 
 	// Core hooks
 	posts.registerHooks();
+	registerComposerFormatting(Plugins);
 
 	// Deprecation notices
 	Plugins.hooks._deprecated.forEach((deprecation, hook) => {

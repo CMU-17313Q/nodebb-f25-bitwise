@@ -109,6 +109,7 @@ if (document.readyState === 'loading') {
 			'search',
 			'forum/header',
 			'hooks',
+			'forum/composer/text-color',
 		], function (taskbar, helpers, pagination, messages, search, header, hooks) {
 			header.prepareDOM();
 			taskbar.init();

@@ -41,6 +41,25 @@ html[data-dir="rtl"] {
 	}
 }
 
+[component="composer"] .formatting-group .dropdown-menu .text-color-icon {
+    display: inline-block;
+    width: 1.5rem;
+    text-align: center;
+}
+
+[component="composer"] .formatting-group .dropdown-menu .text-color-red { color: #d92b2b !important; }
+[component="composer"] .formatting-group .dropdown-menu .text-color-orange { color: #e96310 !important; }
+[component="composer"] .formatting-group .dropdown-menu .text-color-yellow { color: #e5b70a !important; }
+[component="composer"] .formatting-group .dropdown-menu .text-color-green { color: #1f9d55 !important; }
+[component="composer"] .formatting-group .dropdown-menu .text-color-teal { color: #1aa39a !important; }
+[component="composer"] .formatting-group .dropdown-menu .text-color-blue { color: #2474b5 !important; }
+[component="composer"] .formatting-group .dropdown-menu .text-color-indigo { color: #5856d6 !important; }
+[component="composer"] .formatting-group .dropdown-menu .text-color-purple { color: #a32cc4 !important; }
+[component="composer"] .formatting-group .dropdown-menu .text-color-pink { color: #d63384 !important; }
+[component="composer"] .formatting-group .dropdown-menu .text-color-gray { color: #6c757d !important; }
+[component="composer"] .formatting-group .dropdown-menu .text-color-black { color: #111111 !important; }
+[component="composer"] .formatting-group .dropdown-menu .text-color-clear { color: var(--bs-secondary-color, #6c757d) !important; }
+
 .btn-link {
 	&:hover, &.active {
 		background-color: var(--btn-ghost-hover-color);
