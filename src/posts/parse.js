@@ -12,7 +12,7 @@ const translator = require('../translator');
 const utils = require('../utils');
 const postCache = require('./cache');
 
-const colorTagRegex = /\[color=([^\]]+)\]([\s\S]*?)\[\/color]/gi;
+const colorTagRegex = /\[color=([^\]]+)\]([\s\S]*?)\[\/color\]/gi;
 const validHexColor = /^#(?:[0-9a-f]{3}|[0-9a-f]{6})$/i;
 const allowedNamedColors = new Map([
 	['red', '#d92b2b'],
