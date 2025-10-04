@@ -83,8 +83,8 @@ utils.generateUUID = function () {
 };
 
 utils.isUserNameValid = function (username) {
-    const regex = /^[A-Za-z0-9]+$/;
-    return regex.test(username);
-}
+	const regex = /^[\x30-\x39\x41-\x5A\x61-\x7A]+$/;
+	return regex.test(username);
+};
 
 module.exports = utils;
