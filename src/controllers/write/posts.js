@@ -65,6 +65,23 @@ Posts.getSummary = async (req, res) => {
 	helpers.formatApiResponse(200, res, post);
 };
 
+Posts.getTldr = async (req, res) => {
+	const tldr = require('../../tldr');
+	const { pid } = req.params;
+
+	try {
+		const postData = await posts.getPostData(pid);
+		if (!postData) {
+			return helpers.formatApiResponse(404, res, new Error('[[error:no-post]]'));
+		}
+
+		const summary = await tldr.generateSummary(postData.content);
+		helpers.formatApiResponse(200, res, { summary });
+	} catch (err) {
+		helpers.formatApiResponse(500, res, err);
+	}
+};
+
 Posts.getRaw = async (req, res) => {
 	const content = await api.posts.getRaw(req, { pid: req.params.pid });
 	if (content === null) {
