@@ -33,6 +33,6 @@
         "NODEBB_REDIS_DB": "0",
         "NODEBB_ADMIN_USERNAME": "bitwise",
         "NODEBB_ADMIN_PASSWORD": "bitwise",
-        "NODEBB_ADMIN_EMAIL": "aryalanurag15319@gmail.com"
+        "NODEBB_ADMIN_EMAIL": "aryalanurag15319@gmail.com",
     }
 }
