@@ -1,0 +1,37 @@
+post:
+  tags:
+    - posts
+  summary: toggle official status of a post
+  description: This operation toggles the official status of a post (marks it as official if it's not, or removes official status if it is)
+  parameters:
+    - in: path
+      name: pid
+      schema:
+        type: string
+      required: true
+      description: a valid post id
+      example: 2
+  responses:
+    '200':
+      description: Post official status successfully toggled
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: ../../../../components/schemas/Status.yaml#/Status
+              response:
+                type: object
+                properties:
+                  post:
+                    type: object
+                    description: The updated post object
+    '400':
+      $ref: ../../../../components/responses/400.yaml#/400
+    '401':
+      $ref: ../../../../components/responses/401.yaml#/401
+    '403':
+      $ref: ../../../../components/responses/403.yaml#/403
+    '404':
+      description: Post not found

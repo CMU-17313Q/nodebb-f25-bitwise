@@ -1,0 +1,87 @@
+put:
+  tags:
+    - posts
+  summary: mark post as official
+  description: This operation marks a post as official
+  parameters:
+    - in: path
+      name: pid
+      schema:
+        type: string
+      required: true
+      description: a valid post id
+      example: 2
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            official:
+              type: boolean
+              description: Whether to mark the post as official (true) or not (false)
+              example: true
+          required:
+            - official
+  responses:
+    '200':
+      description: Post official status successfully updated
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: ../../../components/schemas/Status.yaml#/Status
+              response:
+                type: object
+                properties:
+                  post:
+                    type: object
+                    description: The updated post object
+    '400':
+      $ref: ../../../components/responses/400.yaml#/400
+    '401':
+      $ref: ../../../components/responses/401.yaml#/401
+    '403':
+      $ref: ../../../components/responses/403.yaml#/403
+    '404':
+      description: Post not found
+delete:
+  tags:
+    - posts
+  summary: unmark post as official
+  description: This operation removes the official status from a post
+  parameters:
+    - in: path
+      name: pid
+      schema:
+        type: string
+      required: true
+      description: a valid post id
+      example: 2
+  responses:
+    '200':
+      description: Post official status successfully removed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: ../../../components/schemas/Status.yaml#/Status
+              response:
+                type: object
+                properties:
+                  post:
+                    type: object
+                    description: The updated post object
+    '400':
+      $ref: ../../../components/responses/400.yaml#/400
+    '401':
+      $ref: ../../../components/responses/401.yaml#/401
+    '403':
+      $ref: ../../../components/responses/403.yaml#/403
+    '404':
+      description: Post not found
