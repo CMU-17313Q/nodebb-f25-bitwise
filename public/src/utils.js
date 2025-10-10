@@ -82,4 +82,9 @@ utils.generateUUID = function () {
 	return uuid.split(/[:/]/g).pop().toLowerCase(); // remove prefixes
 };
 
+utils.isUserNameValid = function (username) {
+	const regex = /^[0-9A-Za-z]+$/;
+	return regex.test(username);
+};
+
 module.exports = utils;
