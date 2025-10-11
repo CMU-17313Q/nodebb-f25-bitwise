@@ -44,7 +44,7 @@ module.exports = function (Posts) {
 					groupTitleArray: [],
 					selectedGroups: [],
 					signature: '',
-					banned: 0
+					banned: 0,
 				};
 			}
 			return post;

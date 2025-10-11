@@ -5,7 +5,7 @@ define('anonymous', [], function () {
 
 	Anonymous.init = function () {
 		// Wait for DOM to be ready and then set up anonymous posting
-		$(document).ready(function() {
+		$(document).ready(function () {
 			setupAnonymousPosting();
 			interceptAjaxCalls();
 		});
@@ -13,7 +13,7 @@ define('anonymous', [], function () {
 
 	function setupAnonymousPosting() {
 		// Try to add the toggle when composer is loaded
-		const checkForComposer = setInterval(function() {
+		const checkForComposer = setInterval(function () {
 			const composer = $('.composer');
 			if (composer.length && !composer.find('#anonymous-post-toggle').length) {
 				addAnonymousToggle(composer);
@@ -21,13 +21,13 @@ define('anonymous', [], function () {
 		}, 1000);
 
 		// Stop checking after 30 seconds
-		setTimeout(function() {
+		setTimeout(function () {
 			clearInterval(checkForComposer);
 		}, 30000);
 
 		// Also listen for dynamic composer loading
-		$(document).on('click', '[component="category/post"], #new_topic, [component="topic/reply"]', function() {
-			setTimeout(function() {
+		$(document).on('click', '[component="category/post"], #new_topic, [component="topic/reply"]', function () {
+			setTimeout(function () {
 				const composer = $('.composer');
 				if (composer.length && !composer.find('#anonymous-post-toggle').length) {
 					addAnonymousToggle(composer);
@@ -68,7 +68,7 @@ define('anonymous', [], function () {
 		const originalAjax = $.ajax;
 
 		// Override $.ajax to intercept API calls
-		$.ajax = function(options) {
+		$.ajax = function (options) {
 			// Check if this is a topic creation or reply API call
 			if (options.url && options.type === 'POST') {
 				if (options.url === '/api/v3/topics' || options.url.match(/^\/api\/v3\/topics\/\d+$/)) {

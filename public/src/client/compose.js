@@ -15,14 +15,14 @@ define('forum/compose', ['hooks', 'forum/composer/text-color'], function (hooks)
 	};
 
 	// Add anonymous posting functionality
-	$(document).ready(function() {
+	$(document).ready(function () {
 		// Listen for composer enhancement to add anonymous toggle
-		$(window).on('action:composer.enhance', function(ev, data) {
+		$(window).on('action:composer.enhance', function (ev, data) {
 			addAnonymousToggle(data.container);
 		});
 
 		// Hook into composer submit to include anonymous flag
-		$(window).on('action:composer.submit', function(ev, data) {
+		$(window).on('action:composer.submit', function (ev, data) {
 			const container = data.container || $('.composer');
 			const anonymousCheckbox = container.find('#anonymous-post-toggle');
 			if (anonymousCheckbox.length) {
