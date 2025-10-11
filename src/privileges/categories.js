@@ -32,6 +32,7 @@ const _privilegeMap = new Map([
 	['posts:downvote', { label: '[[admin/manage/privileges:downvote-posts]]', type: 'posting' }],
 	['topics:delete', { label: '[[admin/manage/privileges:delete-topics]]', type: 'posting' }],
 	['posts:view_deleted', { label: '[[admin/manage/privileges:view-deleted]]', type: 'moderation' }],
+	['posts:view_anonymous', { label: '[[admin/manage/privileges:view-anonymous]]', type: 'moderation' }],
 	['purge', { label: '[[admin/manage/privileges:purge]]', type: 'moderation' }],
 	['moderate', { label: '[[admin/manage/privileges:moderate]]', type: 'moderation' }],
 	['posts:mark_official', { label: '[[admin/manage/privileges:mark-posts-official]]', type: 'moderation' }],
