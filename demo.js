@@ -1,5 +1,4 @@
 'use strict';
-
 // This file is a temporary script to demonstrate the functionality
 // of the `src/posts/api.js` file by running its demo function
 // in a self-contained environment.
@@ -26,7 +25,6 @@ const mockDb = {
 };
 
 // Mock `posts` object to simulate database interactions.
-// In a real NodeBB, these would be functions like `posts.getPostData` from a database module.
 const posts = {
 	/**
 	 * Retrieves post data from the mock database.
@@ -47,6 +45,7 @@ const posts = {
 	async setPostField(pid, field, value) {
 		if (mockDb[`post:${pid}`]) {
 			mockDb[`post:${pid}`][field] = value;
+			// Direct console.log to avoid winston in this demo
 			console.log(`[DB MOCK] Updated post:${pid} - set field '${field}' to '${value}'`);
 		}
 	},
@@ -60,7 +59,7 @@ const helpers = {
 	 * @param {object} payload - The JSON payload to send.
 	 */
 	status(res, payload) {
-		// Direct logging to avoid winston issues.
+		// res is unused in this demo; we just log
 		console.log(`[API RESPONSE] Status: 200 OK. Payload: ${JSON.stringify(payload, null, 2)}`);
 	},
 
@@ -69,7 +68,7 @@ const helpers = {
 	 * @param {object} res - The response object.
 	 */
 	notFound() {
-		// Direct logging to avoid winston issues.
+		// res is unused in this demo; we just log
 		console.log('[API RESPONSE] Status: 404 Not Found.');
 	},
 };
@@ -86,6 +85,9 @@ const helpers = {
  * @param {object} res - The response object.
  */
 async function toggleOfficial(req, res) {
+	// mark as used to satisfy no-unused-vars in this demo
+	void res;
+
 	// 1. Validate the incoming post ID (pid).
 	const { pid } = req.params;
 	if (!pid) {
@@ -113,7 +115,7 @@ async function toggleOfficial(req, res) {
 	helpers.status(res, {
 		success: true,
 		message: 'Official answer flag toggled successfully.',
-		newStatus,
+		newStatus: newStatus,
 	});
 }
 
@@ -127,28 +129,28 @@ async function runDemo() {
 	console.log('--- Initial State of Mock Posts ---');
 	console.log('Post 1:', await posts.getPostData('1'));
 	console.log('Post 2:', await posts.getPostData('2'));
-	console.log('\n');
+	console.log('');
 
 	// Simulate toggling post ID 1
 	console.log('--- Toggling Post 1 (current status: false) ---');
 	await toggleOfficial({ params: { pid: '1' } }, {});
 	console.log('\n--- State After First Toggle ---');
 	console.log('Post 1:', await posts.getPostData('1'));
-	console.log('\n');
+	console.log('');
 
 	// Simulate toggling post ID 2 (which has no flag initially)
 	console.log('--- Toggling Post 2 (current status: undefined) ---');
 	await toggleOfficial({ params: { pid: '2' } }, {});
 	console.log('\n--- State After First Toggle ---');
 	console.log('Post 2:', await posts.getPostData('2'));
-	console.log('\n');
+	console.log('');
 
 	// Simulate toggling post ID 1 again
 	console.log('--- Toggling Post 1 again (current status: true) ---');
 	await toggleOfficial({ params: { pid: '1' } }, {});
 	console.log('\n--- State After Second Toggle ---');
 	console.log('Post 1:', await posts.getPostData('1'));
-	console.log('\n');
+	console.log('');
 
 	// Simulate hitting a non-existent post ID
 	console.log('--- Attempting to toggle non-existent post 999 ---');

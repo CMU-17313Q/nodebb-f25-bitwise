@@ -16,6 +16,7 @@ const plugins = require('../plugins');
 const utils = require('../utils');
 const cache = require('../cache');
 const socketHelpers = require('../socket.io/helpers');
+const profanity = require('./profanity');
 
 module.exports = function (Posts) {
 	Posts.getQueuedPosts = async (filter = {}, options = {}) => {
@@ -128,6 +129,11 @@ module.exports = function (Posts) {
 					userData.postcount <= 0 ||
 					!await Posts.canUserPostContentWithLinks(uid, data.content)
 				);
+		}
+
+		const hasProfanity = await profanity.check(data.content);
+		if (hasProfanity) {
+			shouldQueue = true;
 		}
 
 		const result = await plugins.hooks.fire('filter:post.shouldQueue', {
