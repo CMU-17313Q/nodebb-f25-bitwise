@@ -31,7 +31,7 @@ module.exports = function (Posts) {
 		let postData = { pid, uid, tid, content, sourceContent, timestamp };
 
 		// Handle anonymous posting
-		if (data.anonymous) {
+		if (data.anonymous === 1 || data.anonymous === '1' || data.anonymous === true) {
 			postData.anonymous = 1;
 		}
 
