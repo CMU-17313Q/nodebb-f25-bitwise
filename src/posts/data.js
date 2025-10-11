@@ -7,7 +7,7 @@ const utils = require('../utils');
 const intFields = [
 	'uid', 'pid', 'tid', 'deleted', 'timestamp',
 	'upvotes', 'downvotes', 'deleterUid', 'edited',
-	'replies', 'bookmarks', 'announces', 'official',
+	'replies', 'bookmarks', 'announces', 'official', 'anonymous',
 ];
 
 module.exports = function (Posts) {
@@ -73,6 +73,10 @@ function modifyPost(post, fields) {
 		// Ensure official field is always present with default value
 		if (!post.hasOwnProperty('official')) {
 			post.official = 0;
+		}
+		// Ensure anonymous field is always present with default value
+		if (!post.hasOwnProperty('anonymous')) {
+			post.anonymous = 0;
 		}
 	}
 }

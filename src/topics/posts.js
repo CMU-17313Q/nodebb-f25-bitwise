@@ -152,6 +152,8 @@ module.exports = function (Topics) {
 			}
 		});
 
+		postData = await posts.processAnonymousPosts(postData, uid);
+
 		const result = await plugins.hooks.fire('filter:topics.addPostData', {
 			posts: postData,
 			uid: uid,
