@@ -1,6 +1,6 @@
 'use strict';
 
-const fetch = require('node-fetch');
+const fetch = global.fetch || require('node-fetch');
 const nconf = require('nconf');
 
 const TLDR = module.exports;
