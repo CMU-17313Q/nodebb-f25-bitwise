@@ -1259,6 +1259,105 @@ describe('Post\'s', () => {
 			});
 		});
 	});
+
+	describe('anonymous posting', () => {
+		let anonymousTopicData;
+		let anonymousPostData;
+		let regularUid;
+		let adminUid;
+
+		before(async () => {
+			// Create regular user for testing
+			regularUid = await user.create({ username: 'regularuser' });
+
+			// Create admin user for privilege testing
+			adminUid = await user.create({ username: 'testadmin' });
+			await groups.join('administrators', adminUid);
+		});
+
+		it('should create an anonymous post when anonymous flag is set', async () => {
+			const result = await topics.post({
+				uid: voterUid,
+				cid: cid,
+				title: 'Anonymous Test Topic',
+				content: 'This is an anonymous post',
+				anonymous: 1,
+			});
+
+			anonymousTopicData = result.topicData;
+			anonymousPostData = result.postData;
+
+			assert.strictEqual(anonymousPostData.anonymous, 1);
+		});
+
+		it('should create an anonymous reply when anonymous flag is set', async () => {
+			const replyData = await topics.reply({
+				uid: voterUid,
+				tid: topicData.tid,
+				content: 'This is an anonymous reply',
+				anonymous: 1,
+			});
+
+			assert.strictEqual(replyData.anonymous, 1);
+		});
+
+		it('should hide user identity for anonymous posts from regular users', async () => {
+			const retrievedPost = await apiPosts.get({ uid: regularUid }, { pid: anonymousPostData.pid });
+
+			// Post should be accessible but uid should be 0 (hidden)
+			assert.strictEqual(retrievedPost.uid, 0);
+			assert(retrievedPost.originalUid); // Original uid should be stored for admins
+		});
+
+		it('should show user identity for anonymous posts to admins', async () => {
+			const retrievedPost = await apiPosts.get({ uid: adminUid }, { pid: anonymousPostData.pid });
+
+			// Admin should see the actual uid
+			assert.strictEqual(retrievedPost.uid, voterUid);
+		});
+
+		it('should add posts:view_anonymous privilege correctly', async () => {
+			const pids = [anonymousPostData.pid];
+			const privs = await privileges.posts.get(pids, regularUid);
+
+			assert(privs[0].hasOwnProperty('posts:view_anonymous'));
+			assert.strictEqual(privs[0]['posts:view_anonymous'], false); // Regular user should not have this privilege
+		});
+
+		it('should allow admin to view anonymous posts', async () => {
+			const pids = [anonymousPostData.pid];
+			const privs = await privileges.posts.get(pids, adminUid);
+
+			assert.strictEqual(privs[0]['posts:view_anonymous'], true); // Admin should have this privilege
+		});
+
+		it('should not affect non-anonymous posts', async () => {
+			const normalPost = await topics.post({
+				uid: voterUid,
+				cid: cid,
+				title: 'Normal Test Topic',
+				content: 'This is a normal post',
+				anonymous: 0, // Explicitly not anonymous
+			});
+
+			assert.strictEqual(normalPost.postData.anonymous, 0);
+
+			const retrievedPost = await apiPosts.get({ uid: regularUid }, { pid: normalPost.postData.pid });
+			assert.strictEqual(retrievedPost.uid, voterUid); // Should show real uid
+		});
+
+		it('should handle missing anonymous flag gracefully', async () => {
+			const normalPost = await topics.post({
+				uid: voterUid,
+				cid: cid,
+				title: 'Normal Test Topic 2',
+				content: 'This is a normal post without anonymous flag',
+				// No anonymous flag set
+			});
+
+			assert.strictEqual(normalPost.postData.anonymous, 0); // Should default to 0
+		});
+	});
 });
 
 describe('Posts\'', async () => {

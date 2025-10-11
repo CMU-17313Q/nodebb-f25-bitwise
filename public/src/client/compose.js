@@ -14,5 +14,7 @@ define('forum/compose', ['hooks', 'forum/composer/text-color'], function (hooks)
 		}
 	};
 
+	// Anonymous posting functionality is now handled by anonymous.js module
+
 	return Compose;
 });

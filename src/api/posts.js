@@ -42,6 +42,14 @@ postsAPI.get = async function (caller, data) {
 		post.content = '[[topic:post-is-deleted]]';
 	}
 
+	// Handle anonymous post display
+	if (post.anonymous && !userPrivilege['posts:view_anonymous']) {
+		// Store original uid for admin/privileged users
+		post.originalUid = post.uid;
+		// Hide user identity for anonymous posts
+		post.uid = 0;
+	}
+
 	return post;
 };
 

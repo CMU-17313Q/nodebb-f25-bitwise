@@ -459,6 +459,7 @@ async function giveWorldPrivileges() {
 	const modPrivileges = defaultPrivileges.concat([
 		'groups:topics:schedule',
 		'groups:posts:view_deleted',
+		'groups:posts:view_anonymous',
 		'groups:purge',
 	]);
 	const guestPrivileges = ['groups:find', 'groups:read', 'groups:topics:read'];
