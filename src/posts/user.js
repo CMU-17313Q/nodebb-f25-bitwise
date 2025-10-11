@@ -23,15 +23,15 @@ module.exports = function (Posts) {
 		const userPrivileges = await privileges.posts.get(pids, uid);
 
 		return posts.map((post, index) => {
-			if (post.anonymous && userPrivileges[index] && !userPrivileges[index]['posts:view_anonymous']) {
+			if (post.anonymous && (!userPrivileges[index] || !userPrivileges[index]['posts:view_anonymous'])) {
 				// Store original uid for debugging
 				post.originalUid = post.uid;
 				// Replace user info with anonymous data
 				post.uid = 0;
 				post.user = {
 					uid: 0,
-					username: '[[posts:anonymous-user]]',
-					displayname: '[[posts:anonymous-user]]',
+					username: '[[topic:anonymous-user]]',
+					displayname: '[[topic:anonymous-user]]',
 					userslug: '',
 					reputation: 0,
 					postcount: 0,

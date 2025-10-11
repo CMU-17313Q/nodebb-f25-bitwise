@@ -6,9 +6,6 @@ define('anonymous', ['translator', 'hooks'], function (translator, hooks) {
 	anonymous.init = function () {
 		console.log('Anonymous: init() called');
 
-		// Add test element
-		$('body').append('<div style="position: fixed; top: 120px; right: 10px; background: green; color: white; padding: 10px; z-index: 99999;">Anonymous Module Loaded!</div>');
-
 		// Setup composer detection
 		$(document).ready(function () {
 			// Try to find existing composers
@@ -34,6 +31,17 @@ define('anonymous', ['translator', 'hooks'], function (translator, hooks) {
 				if (data && data.postContainer) {
 					addAnonymousToggle(data.postContainer);
 				}
+			});
+
+			// Hook into form submission to add anonymous flag
+			hooks.on('filter:composer.submit', function (data) {
+				console.log('Anonymous: composer submit event', data);
+				const anonymousToggle = $('#anonymous-toggle');
+				if (anonymousToggle.length && anonymousToggle.is(':checked')) {
+					console.log('Anonymous: Adding anonymous flag to submission');
+					data.anonymous = 1;
+				}
+				return data;
 			});
 		});
 	};
