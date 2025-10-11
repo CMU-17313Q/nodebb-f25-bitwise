@@ -68,3 +68,32 @@ npm run test/utils.js
 - Confirms invalid characters (symbols, accented, Unicode) are correctly rejected.
 - Prevents empty or whitespace-only usernames.
 - Covers main edge cases including hidden characters and non-English input.
+
+# User Guide – Text Color Feature
+## Overview
+The **Text Color Feature** allows users to change the color of their text in posts and replies, similar to Microsoft Word’s text-color tool.  This enhancement improves message readability and helps emphasize important content, for example, **red** for urgent announcements.
+## How to Use
+### 1. Access the Color Picker
+When composing a new post or reply:
+1. Open the **Composer** (message input area).
+2. Click the **paintbrush icon** in the formatting toolbar.
+3. A dropdown list of colors (red, orange, yellow, green, etc.) will appear.
+### 2. Apply a Text Color
+- Select any part of your message.
+- Click your preferred color from the dropdown.
+- Your text will appear wrapped in a color tag such as: ```[color=#d92b2b] Important! [/color]```
+- When previewed or posted, the text appears in that color.
+### 3. Clear Text Color
+To remove a color:
+- Click the **paintbrush icon** again.
+- Select **Clear color (eraser icon)**.
+- This removes all `[color]` tags and resets text to default color.
+### Test Location
+Automated tests are located in: ```test/sanitizer/color-spec.js```.
+Make sure **Mocha v11.7.4** is installed.  
+Run the tests in the terminal using:
+```npx mocha test/sanitizer/color-spec.js```
+### Why These Tests Are Sufficient
+- No unsafe inline styles or HTML bypass the message post.
+- Test that valid colors are rendered correctly, while invalid ones are stripped.
+- Main edge cases are tested.
