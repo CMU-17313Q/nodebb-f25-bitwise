@@ -27,6 +27,10 @@ const activitypub = require('../src/activitypub');
 const utils = require('../src/utils');
 const api = require('../src/api');
 
+// Enable mock mode for TLDR to avoid external API timeouts in generic API schema tests
+const tldr = require('../src/tldr');
+tldr._useMockForTests = true;
+
 describe('API', async () => {
 	let readApi = false;
 	let writeApi = false;
@@ -190,10 +194,6 @@ describe('API', async () => {
 		if (setup) {
 			return;
 		}
-
-		// Enable mock mode for TLDR to avoid external API timeouts in schema tests
-		const tldr = require('../src/tldr');
-		tldr._useMockForTests = true;
 
 		// Create sample users
 		const adminUid = await user.create({ username: 'admin', password: '123456' });
