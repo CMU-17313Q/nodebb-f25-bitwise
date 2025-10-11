@@ -110,13 +110,15 @@ if (document.readyState === 'loading') {
 			'forum/header',
 			'hooks',
 			'forum/composer/text-color',
-		], function (taskbar, helpers, pagination, messages, search, header, hooks) {
+			'anonymous',
+		], function (taskbar, helpers, pagination, messages, search, header, hooks, anonymous) {
 			header.prepareDOM();
 			taskbar.init();
 			helpers.register();
 			pagination.init();
 			search.init();
 			overrides.overrideTimeago();
+			anonymous.init();
 			hooks.fire('action:app.load');
 			messages.show();
 			appLoaded = true;
