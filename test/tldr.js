@@ -21,6 +21,9 @@ describe('TLDR', () => {
 	let jar;
 
 	before(async () => {
+		// Disable mock mode for dedicated TLDR tests (it may be enabled by test/api.js)
+		tldr._useMockForTests = false;
+		
 		// Create test users
 		adminUid = await user.create({ username: 'tldr_admin', password: 'admin123' });
 		regularUid = await user.create({ username: 'tldr_user', password: 'user123' });
@@ -285,6 +288,9 @@ describe('TLDR', () => {
 	});
 
 	after(async () => {
+		// Restore mock mode for other tests
+		tldr._useMockForTests = true;
+		
 		// Cleanup
 		await categories.purge(cid, adminUid);
 	});
