@@ -1386,7 +1386,7 @@ const profanityList = [
 	'yankee',
 	'yellowman',
 	'zigabo',
-	'zipperhead'
+	'zipperhead',
 ];
 
 
