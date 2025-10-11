@@ -229,30 +229,29 @@ Posts.notifyQueuedPostOwner = async (req, res) => {
 };
 
 Posts.setOfficial = async (req, res) => {
-	const pid = req.params.pid;
+	const { pid } = req.params;
 	const body = req.body || {};
-	const desired =
-    body.official === true ||
-    body.official === 'true' ||
-    body.official === 1 ||
-    body.official === '1';
+	const desired = body.official === true ||
+		body.official === 'true' ||
+		body.official === 1 ||
+		body.official === '1';
 
-	const post = desired
-		? await api.posts.markOfficial(req, { pid })
-		: await api.posts.unmarkOfficial(req, { pid });
+	const post = desired ?
+		await api.posts.markOfficial(req, { pid }) :
+		await api.posts.unmarkOfficial(req, { pid });
 
 
 	helpers.formatApiResponse(200, res, { post });
 };
 
 Posts.unsetOfficial = async (req, res) => {
-	const pid = req.params.pid;
+	const { pid } = req.params;
 	const post = await api.posts.unmarkOfficial(req, { pid });
 	helpers.formatApiResponse(200, res, { post });
 };
 
 Posts.toggleOfficial = async (req, res) => {
-	const pid = req.params.pid;
+	const { pid } = req.params;
 	const post = await api.posts.toggleOfficial(req, { pid });
 	helpers.formatApiResponse(200, res, { post });
 };

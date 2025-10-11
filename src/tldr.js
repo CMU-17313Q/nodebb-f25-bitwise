@@ -14,7 +14,7 @@ TLDR.generateSummary = async function (text) {
 	}
 
 	// Clean up HTML and format text for better summarization
-	let cleanText = text
+	const cleanText = text
 		.replace(/<[^>]*>/g, '') // Remove HTML tags
 		.replace(/&nbsp;/g, ' ') // Replace nbsp
 		.replace(/&lt;/g, '<')
