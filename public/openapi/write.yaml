@@ -178,6 +178,8 @@ paths:
     $ref: 'write/posts/pid/raw.yaml'
   /posts/{pid}/summary:
     $ref: 'write/posts/pid/summary.yaml'
+  /posts/{pid}/tldr:
+    $ref: 'write/posts/pid/tldr.yaml'
   /posts/{pid}/state:
     $ref: 'write/posts/pid/state.yaml'
   /posts/{pid}/move:
