@@ -685,6 +685,7 @@ describe('Categories', () => {
 					'posts:mark_official': false,
 					purge: false,
 					'posts:view_deleted': false,
+					'posts:view_anonymous': false,
 					moderate: false,
 					'topics:mark_official': false,
 				});
@@ -741,6 +742,7 @@ describe('Categories', () => {
 					'groups:topics:read': true,
 					'groups:purge': false,
 					'groups:posts:view_deleted': false,
+					'groups:posts:view_anonymous': false,
 					'groups:moderate': false,
 				});
 
