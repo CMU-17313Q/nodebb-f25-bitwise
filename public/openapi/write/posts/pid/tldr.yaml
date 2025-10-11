@@ -1,0 +1,36 @@
+post:
+  tags:
+    - posts
+  summary: generate TL;DR summary for a post
+  description: This operation generates a short summary (TL;DR) for a post's content using AI
+  parameters:
+    - in: path
+      name: pid
+      schema:
+        type: string
+      required: true
+      description: a valid post id
+      example: 1
+  responses:
+    '200':
+      description: Summary successfully generated
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                $ref: ../../../components/schemas/Status.yaml#/Status
+              response:
+                type: object
+                properties:
+                  summary:
+                    type: string
+                    description: A short summary of the post content
+                    example: This post discusses the main features of the new update.
+    '400':
+      description: Bad request - invalid post ID
+    '404':
+      description: Post not found
+    '500':
+      description: Server error - summary generation failed (API timeout, invalid credentials, etc.)

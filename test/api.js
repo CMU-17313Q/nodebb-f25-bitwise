@@ -27,6 +27,10 @@ const activitypub = require('../src/activitypub');
 const utils = require('../src/utils');
 const api = require('../src/api');
 
+// Enable mock mode for TLDR to avoid external API timeouts in generic API schema tests
+const tldr = require('../src/tldr');
+tldr._useMockForTests = true;
+
 describe('API', async () => {
 	let readApi = false;
 	let writeApi = false;
@@ -70,6 +74,13 @@ describe('API', async () => {
 				{
 					in: 'path',
 					name: 'token',
+					example: '', // to be defined later...
+				},
+			],
+			'/posts/{pid}/tldr': [
+				{
+					in: 'path',
+					name: 'pid',
 					example: '', // to be defined later...
 				},
 			],
@@ -276,6 +287,7 @@ describe('API', async () => {
 		});
 		mocks.delete['/posts/{pid}/diffs/{timestamp}'][0].example = unprivTopic.postData.pid;
 		mocks.delete['/posts/{pid}/diffs/{timestamp}'][1].example = (await posts.diffs.list(unprivTopic.postData.pid))[0];
+		mocks.post['/posts/{pid}/tldr'][0].example = unprivTopic.postData.pid;
 
 		// Create a sample flag
 		const { flagId } = await flags.create('post', 1, unprivUid, 'sample reasons', Date.now()); // deleted in DELETE /api/v3/flags/1
