@@ -201,3 +201,306 @@ npm test
 7. **API Resilience**: Gracefully handles API unavailability during testing, ensuring tests don't fail due to external service issues
 
 The test suite ensures that the TLDR feature is robust, secure, and provides a good user experience even when the AI service is temporarily unavailable or returns unexpected results.
+
+# User Guide – Anonymous Posting Feature
+
+
+
+
+## Feature Description
+
+
+The anonymous posting feature adds a checkbox to the post composer that allows users to submit posts without revealing their identity. When enabled, the post will show "Anonymous" instead of the user's name, while administrators and users with special privileges can still view the original author.
+
+
+## How to Use the Anonymous Posting Feature
+
+
+### Creating an Anonymous Post
+
+
+1. **Navigate to Post Creation**
+   - Click "New Topic" to create a new discussion thread, OR
+   - Click "Reply" on an existing topic to respond to a discussion
+
+
+2. **Access the Anonymous Toggle**
+   - Look for the post composer that appears
+   - In the formatting toolbar at the bottom, locate the "Post anonymously" checkbox
+   - **Note**: This checkbox is only visible on desktop/tablet devices (hidden on mobile for space constraints)
+
+
+3. **Enable Anonymous Posting**
+   - Check the "Post anonymously" checkbox before writing your content
+   - The checkbox will remain checked while you compose your message
+
+
+4. **Compose Your Message**
+   - Write your question, answer, or response as normal
+   - Use all the regular formatting options (bold, italic, links, etc.)
+   - Add images or files if needed
+
+
+5. **Submit the Post**
+   - Click "Submit" or "Post Reply" as usual
+   - Your post will be submitted with anonymous flag enabled
+
+
+### Viewing Anonymous Posts
+
+
+**As a Regular User:**
+- Anonymous posts will display "Anonymous" as the author name
+- You cannot see who actually wrote the post
+- The post content and formatting remain unchanged
+
+
+**As an Administrator or Privileged User:**
+- You can see both "Anonymous" and the real author information
+- This allows for moderation while preserving user privacy
+- The privilege system controls who has this access
+
+
+## Manual Testing Guide
+
+
+### Test Environment Setup
+
+
+1. **Prerequisites**
+   - NodeBB forum instance running locally or on test server
+   - At least two user accounts: one regular user, one administrator
+   - Redis/MongoDB database running (required for NodeBB)
+
+
+### Test Case 1: Anonymous Post Creation
+
+
+1. **Login as Regular User**
+   - Navigate to any category
+   - Click "New Topic"
+
+
+2. **Verify Checkbox Presence**
+   - Confirm the "Post anonymously" checkbox appears in the composer
+   - Verify it's visible on desktop but hidden on mobile (resize browser window to test)
+
+
+3. **Create Anonymous Topic**
+   - Check the "Post anonymously" checkbox
+   - Enter title: "Test Anonymous Question"
+   - Enter content: "This is a test of anonymous posting functionality"
+   - Click "Submit"
+
+
+4. **Verify Post Display**
+   - Confirm the new topic appears in the category
+   - Verify the author shows as "Anonymous" instead of your username
+   - Check that the post content is displayed normally
+
+
+### Test Case 2: Anonymous Reply Creation
+
+
+1. **Navigate to Existing Topic**
+   - Open any existing discussion topic
+   - Click "Reply"
+
+
+2. **Create Anonymous Reply**
+   - Check the "Post anonymously" checkbox
+   - Enter reply content: "This is an anonymous response"
+   - Click "Post Reply"
+
+
+3. **Verify Reply Display**
+   - Confirm the reply appears in the topic
+   - Verify the author shows as "Anonymous"
+   - Check that other users' non-anonymous posts still show their real usernames
+
+
+### Test Case 3: Administrator View
+
+
+1. **Login as Administrator**
+   - Access the same topics created in previous tests
+
+
+2. **Verify Privileged Access**
+   - View the anonymous posts created earlier
+   - Confirm you can see both "Anonymous" label AND the real author information
+   - This demonstrates the privilege system working correctly
+
+
+### Test Case 4: Mobile Responsiveness
+
+
+1. **Test Mobile Interface**
+   - Access the forum on mobile device or resize browser window to mobile size
+   - Navigate to post composer
+   - Verify the anonymous checkbox is hidden (should not appear)
+   - This ensures the UI remains clean on smaller screens
+
+
+### Test Case 5: Data Persistence
+
+
+1. **Database Verification**
+   - Create several anonymous and non-anonymous posts
+   - Check that posts are properly stored with anonymous flag
+   - Verify that subsequent page loads maintain the anonymous display
+
+
+### Test Case 6: Edge Cases
+
+
+1. **JavaScript Disabled**
+   - Disable JavaScript in browser
+   - Attempt to create posts (graceful degradation testing)
+
+
+2. **Network Interruption**
+   - Start creating an anonymous post
+   - Interrupt network connection before submission
+   - Verify proper error handling
+
+
+## Automated Tests
+
+
+### Test File Location
+**File**: `test/posts.js` (lines added to existing test suite)
+
+
+### Test Coverage Description
+
+
+The automated test suite includes 8 comprehensive test cases that cover all aspects of the anonymous posting feature:
+
+
+#### 1. **Basic Anonymous Post Creation** (`it('should create a post with anonymous flag')`)
+- **What it tests**: Core functionality of creating anonymous posts
+- **Why it's important**: Ensures the anonymous flag is properly processed and stored
+
+
+#### 2. **Anonymous Flag in Post Data** (`it('should include anonymous flag in post data when requested')`)
+- **What it tests**: Verifies the anonymous flag appears in the post object
+- **Why it's important**: Confirms data integrity throughout the system
+
+
+#### 3. **User Identity Hiding** (`it('should hide user identity for anonymous posts')`)
+- **What it tests**: Anonymous posts show uid=0 instead of real user ID
+- **Why it's important**: Core privacy protection mechanism
+
+
+#### 4. **Privilege System Testing** (`it('should show real author to users with view_anonymous privilege')`)
+- **What it tests**: Administrators can see real authors of anonymous posts
+- **Why it's important**: Enables moderation while maintaining user privacy
+
+
+#### 5. **Non-Anonymous Post Handling** (`it('should not affect normal posts')`)
+- **What it tests**: Regular posts work exactly as before
+- **Why it's important**: Ensures backward compatibility and no regression
+
+
+#### 6. **Anonymous Flag Inheritance** (`it('should handle anonymous flag correctly in post updates')`)
+- **What it tests**: Anonymous status persists through post modifications
+- **Why it's important**: Maintains privacy even when posts are edited
+
+
+#### 7. **Bulk Operations** (`it('should handle multiple anonymous posts correctly')`)
+- **What it tests**: System performance with multiple anonymous posts
+- **Why it's important**: Scalability and performance verification
+
+
+#### 8. **Admin Access Verification** (`it('should allow admins to view anonymous post authors')`)
+- **What it tests**: Administrator privilege override functionality
+- **Why it's important**: Ensures proper moderation capabilities
+
+
+### Why These Tests Are Sufficient
+
+
+The test suite covers:
+
+
+- **Core Functionality**: Post creation, data storage, and retrieval
+- **Security**: User identity protection and privilege enforcement
+- **Edge Cases**: Multiple posts, updates, and admin access
+- **Integration**: How the feature works within the existing NodeBB architecture
+- **Regression Prevention**: Ensures existing functionality remains unaffected
+
+
+The tests verify both positive cases (feature working correctly) and negative cases (proper access control), ensuring the feature is robust and secure.
+
+
+## Technical Implementation Notes
+
+
+### Frontend Components
+- **Anonymous Toggle**: Checkbox dynamically added to composer
+- **AJAX Interception**: Automatic inclusion of anonymous flag in API calls
+- **Responsive Design**: Mobile-friendly interface adaptations
+
+
+### Backend Components
+- **Database Schema**: Anonymous flag added to post data structure
+- **Privilege System**: New `posts:view_anonymous` privilege for access control
+- **API Integration**: Support for anonymous flag in post creation endpoints
+
+
+### Security Considerations
+- **Privacy Protection**: Real user identity hidden from non-privileged users
+- **Moderation Support**: Administrators retain ability to identify anonymous post authors
+- **Data Integrity**: Anonymous flag properly validated and stored
+
+
+## Troubleshooting
+
+
+### Common Issues
+
+
+1. **Checkbox Not Appearing**
+   - Verify JavaScript is enabled
+   - Check browser console for errors
+   - Ensure you're viewing on desktop (hidden on mobile)
+
+
+2. **Anonymous Posts Showing Real Names**
+   - Check user privileges in admin panel
+   - Verify the anonymous flag was properly submitted
+   - Clear browser cache and reload
+
+
+3. **Posts Not Submitting**
+   - Check browser network tab for API errors
+   - Verify database connectivity
+   - Check server logs for backend errors
+
+
+### Development Testing
+
+
+For developers wanting to test the implementation:
+
+
+1. **Run the Test Suite**
+   ```bash
+   npm test
+   ```
+
+
+2. **Check Code Coverage**
+   ```bash
+   npm run coverage
+   ```
+
+
+3. **Manual Database Inspection**
+   - Check the posts collection/table for anonymous flag values
+   - Verify privilege assignments in the database
+
+
+
+
