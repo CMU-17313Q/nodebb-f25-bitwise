@@ -111,14 +111,27 @@ if (document.readyState === 'loading') {
 			'hooks',
 			'forum/composer/text-color',
 			'anonymous',
-		], function (taskbar, helpers, pagination, messages, search, header, hooks, anonymous) {
+		], function (taskbar, helpers, pagination, messages, search, header, hooks, textColor, anonymousPosting) {
+			console.log('Anonymous posting: app.js require callback executed');
+			console.log('Anonymous posting: anonymousPosting object:', anonymousPosting);
+			console.log('Anonymous posting: typeof anonymousPosting:', typeof anonymousPosting);
+			console.log('Anonymous posting: typeof anonymousPosting.init:', typeof anonymousPosting.init);
+
 			header.prepareDOM();
 			taskbar.init();
 			helpers.register();
 			pagination.init();
 			search.init();
 			overrides.overrideTimeago();
-			anonymous.init();
+
+			try {
+				console.log('Anonymous posting: About to call anonymousPosting.init()');
+				anonymousPosting.init();
+				console.log('Anonymous posting: anonymousPosting.init() completed successfully');
+			} catch (error) {
+				console.error('Anonymous posting: Error calling anonymousPosting.init():', error);
+			}
+
 			hooks.fire('action:app.load');
 			messages.show();
 			appLoaded = true;
