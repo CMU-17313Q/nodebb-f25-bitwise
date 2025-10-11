@@ -65,6 +65,23 @@ Posts.getSummary = async (req, res) => {
 	helpers.formatApiResponse(200, res, post);
 };
 
+Posts.getTldr = async (req, res) => {
+	const tldr = require('../../tldr');
+	const { pid } = req.params;
+
+	try {
+		const postData = await posts.getPostData(pid);
+		if (!postData) {
+			return helpers.formatApiResponse(404, res, new Error('[[error:no-post]]'));
+		}
+
+		const summary = await tldr.generateSummary(postData.content);
+		helpers.formatApiResponse(200, res, { summary });
+	} catch (err) {
+		helpers.formatApiResponse(500, res, err);
+	}
+};
+
 Posts.getRaw = async (req, res) => {
 	const content = await api.posts.getRaw(req, { pid: req.params.pid });
 	if (content === null) {
@@ -214,11 +231,10 @@ Posts.notifyQueuedPostOwner = async (req, res) => {
 Posts.setOfficial = async (req, res) => {
 	const { pid } = req.params;
 	const body = req.body || {};
-	const desired =
-    body.official === true ||
-    body.official === 'true' ||
-    body.official === 1 ||
-    body.official === '1';
+	const desired = body.official === true ||
+		body.official === 'true' ||
+		body.official === 1 ||
+		body.official === '1';
 
 	const post = desired ? await api.posts.markOfficial(req, { pid }) : await api.posts.unmarkOfficial(req, { pid });
 
