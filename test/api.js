@@ -191,6 +191,10 @@ describe('API', async () => {
 			return;
 		}
 
+		// Enable mock mode for TLDR to avoid external API timeouts in schema tests
+		const tldr = require('../src/tldr');
+		tldr._useMockForTests = true;
+
 		// Create sample users
 		const adminUid = await user.create({ username: 'admin', password: '123456' });
 		const unprivUid = await user.create({ username: 'unpriv', password: '123456' });

@@ -6,6 +6,13 @@ const nconf = require('nconf');
 const TLDR = module.exports;
 
 TLDR.generateSummary = async function (text) {
+	// In generic API schema tests, use mock response to avoid external API timeouts
+	// This flag is set by test/api.js but not by test/tldr.js
+	if (TLDR._useMockForTests) {
+		const cleanText = text.replace(/<[^>]*>/g, '').trim();
+		return cleanText.length > 100 ? cleanText.substring(0, 97) + '...' : cleanText;
+	}
+
 	// Try environment variable first, then config.json
 	const apiKey = process.env.HUGGING_FACE_API_KEY || nconf.get('huggingface_api_key');
 
