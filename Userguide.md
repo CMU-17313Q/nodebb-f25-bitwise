@@ -49,14 +49,6 @@ If the username contains invalid characters, an error message appears:
 - Spaces, punctuation, and special characters are not allowed.  
 - Accented or Unicode characters (e.g., `ä`, `â`, `محمد`) are rejected.  
 - Empty usernames are not accepted.
-**Examples:**
-| Username | Result | Reason |
-|-----------|---------|--------|
-| `John123` | Valid | Only English letters and digits |
-| `user_name` | Invalid | Contains underscore |
-| `äâé123` | Invalid | Contains Latin-1 accented characters |
-| `محمد` | Invalid | Contains Arabic letters |
-| `TestUser99` | Valid | Only English letters and digits |
 ### File Location
 The validation logic is located in:
 ```
