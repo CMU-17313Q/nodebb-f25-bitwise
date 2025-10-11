@@ -131,7 +131,7 @@ module.exports = function (Posts) {
 				);
 		}
 
-		const hasProfanity = await Posts.profanity.check(data.content);
+		const hasProfanity = await profanity.check(data.content);
 		if (hasProfanity) {
 			shouldQueue = true;
 		}
