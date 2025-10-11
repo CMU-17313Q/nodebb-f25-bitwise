@@ -14,6 +14,43 @@ const privileges = require('../privileges');
 const utils = require('../utils');
 
 module.exports = function (Posts) {
+	Posts.processAnonymousPosts = async function (posts, uid) {
+		if (!Array.isArray(posts) || !posts.length) {
+			return posts;
+		}
+
+		const pids = posts.map(post => post.pid).filter(Boolean);
+		const userPrivileges = await privileges.posts.get(pids, uid);
+
+		return posts.map((post, index) => {
+			if (post.anonymous && userPrivileges[index] && !userPrivileges[index]['posts:view_anonymous']) {
+				// Store original uid for debugging
+				post.originalUid = post.uid;
+				// Replace user info with anonymous data
+				post.uid = 0;
+				post.user = {
+					uid: 0,
+					username: '[[posts:anonymous-user]]',
+					displayname: '[[posts:anonymous-user]]',
+					userslug: '',
+					reputation: 0,
+					postcount: 0,
+					picture: '',
+					'icon:text': '?',
+					'icon:bgColor': '#aaa',
+					status: 'offline',
+					lastonline: 0,
+					groupTitle: '',
+					groupTitleArray: [],
+					selectedGroups: [],
+					signature: '',
+					banned: 0
+				};
+			}
+			return post;
+		});
+	};
+
 	Posts.getUserInfoForPosts = async function (uids, uid) {
 		const [userData, userSettings, signatureUids] = await Promise.all([
 			getUserData(uids, uid),
