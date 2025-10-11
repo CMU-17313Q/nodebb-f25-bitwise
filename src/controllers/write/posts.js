@@ -236,9 +236,7 @@ Posts.setOfficial = async (req, res) => {
 		body.official === 1 ||
 		body.official === '1';
 
-	const post = desired ?
-		await api.posts.markOfficial(req, { pid }) :
-		await api.posts.unmarkOfficial(req, { pid });
+	const post = desired ? await api.posts.markOfficial(req, { pid }) : await api.posts.unmarkOfficial(req, { pid });
 
 
 	helpers.formatApiResponse(200, res, { post });

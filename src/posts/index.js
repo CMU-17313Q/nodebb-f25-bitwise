@@ -1,3 +1,5 @@
+
+
 'use strict';
 
 const _ = require('lodash');
@@ -28,6 +30,7 @@ require('./diffs')(Posts);
 require('./uploads')(Posts);
 
 Posts.attachments = require('./attachments');
+Posts.profanity = require('./profanity');
 
 Posts.exists = async function (pids) {
 	return await db.exists(
