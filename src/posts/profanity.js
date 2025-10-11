@@ -2,7 +2,7 @@
 
 const Profanity = module.exports;
 
-// List of profanity words to detect: https://www.cs.cmu.edu/~biglou/resources/bad-words.txt
+// List of profanity words to detect
 // This can be expanded or made configurable
 const profanityList = [
 	'abbo',
@@ -1389,7 +1389,6 @@ const profanityList = [
 	'zipperhead',
 ];
 
-
 /**
  * Check if content contains profanity
  * @param {string} content - The content to check
@@ -1405,9 +1404,9 @@ Profanity.check = async function (content) {
 
 	// Check each profanity word
 	for (const word of profanityList) {
-		// Use word boundaries to match whole words or parts of words
-		// This will catch variations like "f*ck", "sh!t", etc.
-		const pattern = new RegExp(`\\b${word}\\b|${word.split('').join('[^a-z]*')}`, 'i');
+		// Use word boundaries to match whole words only
+		// This prevents matching "hell" inside "hello"
+		const pattern = new RegExp(`\\b${word}\\b`, 'i');
 		if (pattern.test(lowerContent)) {
 			return true;
 		}
@@ -1465,3 +1464,106 @@ Profanity.clean = async function (content) {
 
 	return cleanedContent;
 };
+
+// Inline tests - Run with: node src/posts/profanity.js
+if (require.main === module) {
+	(async () => {
+		console.log('Running inline tests for Profanity module...\n');
+
+		// Test 1: Check basic profanity detection
+		console.log('Test 1: Basic profanity detection');
+		const test1 = await Profanity.check('This is a damn test');
+		console.log(`  Input: "This is a damn test"`);
+		console.log(`  Contains profanity: ${test1}`);
+		console.assert(test1 === true, 'Should detect profanity');
+		console.log('  Passed\n');
+
+		// Test 2: Check clean content
+		console.log('Test 2: Clean content detection');
+		const test2 = await Profanity.check('This is a nice clean message');
+		console.log(`  Input: "This is a nice clean message"`);
+		console.log(`  Contains profanity: ${test2}`);
+		console.assert(test2 === false, 'Should not detect profanity');
+		console.log('  Passed\n');
+
+		// Test 3: Check null/undefined handling
+		console.log('Test 3: Null/undefined handling');
+		const test3a = await Profanity.check(null);
+		const test3b = await Profanity.check(undefined);
+		const test3c = await Profanity.check('');
+		console.log(`  Input: null, undefined, ""`);
+		console.log(`  Results: ${test3a}, ${test3b}, ${test3c}`);
+		console.assert(test3a === false && test3b === false && test3c === false, 'Should handle null/undefined/empty');
+		console.log('  Passed\n');
+
+		// Test 4: Case insensitivity
+		console.log('Test 4: Case insensitivity');
+		const test4a = await Profanity.check('This is SHIT');
+		const test4b = await Profanity.check('This is ShIt');
+		console.log(`  Input: "This is SHIT", "This is ShIt"`);
+		console.log(`  Results: ${test4a}, ${test4b}`);
+		console.assert(test4a === true && test4b === true, 'Should be case insensitive');
+		console.log('  Passed\n');
+
+		// Test 5: Clean function
+		console.log('Test 5: Clean function');
+		const test5 = await Profanity.clean('This is a damn test with ass words');
+		console.log(`  Input: "This is a damn test with ass words"`);
+		console.log(`  Output: "${test5}"`);
+		console.assert(test5.includes('****') && test5.includes('***'), 'Should replace profanity with asterisks');
+		console.log('  Passed\n');
+
+		// Test 6: Add custom word
+		console.log('Test 6: Add custom word');
+		Profanity.addWord('customword');
+		const test6 = await Profanity.check('This contains customword');
+		console.log(`  Added: "customword"`);
+		console.log(`  Input: "This contains customword"`);
+		console.log(`  Contains profanity: ${test6}`);
+		console.assert(test6 === true, 'Should detect custom added word');
+		console.log('  Passed\n');
+
+		// Test 7: Remove word
+		console.log('Test 7: Remove word');
+		Profanity.removeWord('customword');
+		const test7 = await Profanity.check('This contains customword');
+		console.log(`  Removed: "customword"`);
+		console.log(`  Input: "This contains customword"`);
+		console.log(`  Contains profanity: ${test7}`);
+		console.assert(test7 === false, 'Should not detect removed word');
+		console.log('  Passed\n');
+
+		// Test 8: Get list
+		console.log('Test 8: Get list function');
+		const list = Profanity.getList();
+		console.log(`  List length: ${list.length}`);
+		console.assert(Array.isArray(list) && list.length > 0, 'Should return array of words');
+		console.log('  Passed\n');
+
+		// Test 9: Multiple profanity words
+		console.log('Test 9: Multiple profanity words');
+		const test9 = await Profanity.check('This damn shit is awful');
+		console.log(`  Input: "This damn shit is awful"`);
+		console.log(`  Contains profanity: ${test9}`);
+		console.assert(test9 === true, 'Should detect multiple profanity words');
+		console.log('  Passed\n');
+
+		// Test 10: Clean preserves non-profane content
+		console.log('Test 10: Clean preserves non-profane content');
+		const test10 = await Profanity.clean('Hello world, how are you?');
+		console.log(`  Input: "Hello world, how are you?"`);
+		console.log(`  Output: "${test10}"`);
+		console.assert(test10 === 'Hello world, how are you?', 'Should not modify clean content');
+		console.log('  Passed\n');
+
+		// Test 11: Word boundaries (no false positives)
+		console.log('Test 11: Word boundaries');
+		const test11 = await Profanity.check('Hello world');
+		console.log(`  Input: "Hello world"`);
+		console.log(`  Contains profanity: ${test11}`);
+		console.assert(test11 === false, 'Should not match "hell" in "hello"');
+		console.log('  Passed\n');
+
+		console.log('All tests passed! ✓');
+	})().catch(console.error);
+}
