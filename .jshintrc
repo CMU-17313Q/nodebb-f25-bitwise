@@ -1,0 +1,38 @@
+{
+  "esversion": 11,
+  "node": true,
+  "strict": false,
+  "globalstrict": false,
+  "undef": true,
+  "unused": true,
+  "eqeqeq": true,
+  "curly": true,
+  "browser": true,
+  "devel": true,
+  "jquery": true,
+  "latedef": "nofunc",
+  "freeze": true,
+  "maxparams": 6,
+  "maxdepth": 5,
+  "maxstatements": 50,
+  "maxcomplexity": 15,
+  "globals": {
+    "require": true,
+    "define": true,
+    "app": true,
+    "ajaxify": true,
+    "socket": true,
+    "config": true,
+    "utils": true,
+    "bootbox": true,
+    "RELATIVE_PATH": true
+  },
+  "ignore": [
+    "node_modules/**",
+    "build/**",
+    "public/vendor/**",
+    "vendor/**"
+  ]
+}
+
+
