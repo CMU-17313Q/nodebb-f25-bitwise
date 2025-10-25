@@ -14,7 +14,8 @@
         "lint": "eslint --cache ./nodebb .",
         "test": "nyc --reporter=html --reporter=text-summary mocha",
         "coverage": "nyc report --reporter=text-lcov > ./coverage/lcov.info",
-        "coveralls": "nyc report --reporter=text-lcov | coveralls && rm -r coverage"
+        "coveralls": "nyc report --reporter=text-lcov | coveralls && rm -r coverage",
+        "jshint": "jshint src/ public/src/ --exclude node_modules,build,public/vendor,vendor --reporter=unix"
     },
     "nyc": {
         "exclude": [
@@ -168,6 +169,7 @@
         "grunt-contrib-watch": "1.1.0",
         "husky": "8.0.3",
         "jsdom": "26.1.0",
+        "jshint": "^2.13.6",
         "lint-staged": "16.0.0",
         "mocha": "11.2.2",
         "mocha-lcov-reporter": "1.3.0",
