@@ -8,6 +8,7 @@ import { defineConfig } from 'eslint/config';
 import stylisticJs from '@stylistic/eslint-plugin-js'
 import js from '@eslint/js';
 import globals from 'globals';
+import security from 'eslint-plugin-security';
 
 export default defineConfig([
 	{
@@ -59,7 +60,14 @@ export default defineConfig([
 			'no-prototype-builtins': 'off',
 		}
 	},
-	...publicConfig,
-	...serverConfig
+...publicConfig,
+        ...serverConfig,
+        {
+                plugins: {
+                        security,
+                },
+                rules: {
+                        ...security.configs.recommended.rules,
+                },
+        }
 ]);
-
