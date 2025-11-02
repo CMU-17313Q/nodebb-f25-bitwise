@@ -11,6 +11,7 @@ on:
       - main
       - master
       - develop
+      - 'tool/**'
 
 defaults:
   run:
@@ -26,6 +27,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Verify checkout
+        run: |
+          ls -la
+          pwd
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
