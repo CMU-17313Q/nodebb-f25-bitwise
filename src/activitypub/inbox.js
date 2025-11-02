@@ -317,7 +317,7 @@ inbox.announce = async (req) => {
 			object = object.object;
 			// falls through
 		}
-
+		/* falls through */
 		// Announce(Object)
 		case activitypub._constants.acceptedPostTypes.includes(object.type): {
 			if (String(object.id).startsWith(nconf.get('url'))) { // Local object

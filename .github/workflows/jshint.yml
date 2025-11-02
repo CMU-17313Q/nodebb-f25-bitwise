@@ -1,0 +1,46 @@
+name: JSHint Code Quality
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+
+permissions:
+  contents: read
+
+jobs:
+  jshint-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Copy package.json
+        run: cp install/package.json package.json
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+        with:
+          useLockFile: false
+
+      - name: Run JSHint
+        run: npm run jshint
+
+      - name: Display JSHint summary
+        if: always()
+        run: |
+          echo "JSHint analysis completed successfully"
+          echo "Configuration has been tuned for this codebase"

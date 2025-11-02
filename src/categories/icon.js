@@ -4,7 +4,8 @@ const path = require('path');
 const fs = require('fs/promises');
 const nconf = require('nconf');
 const winston = require('winston');
-const { default: satori } = require('satori');
+const satoriModule = require('satori');
+const satori = satoriModule.default;
 const sharp = require('sharp');
 
 const utils = require('../utils');

@@ -1,0 +1,432 @@
+
+> nodebb@4.4.6 jshint
+> jshint src/ public/src/ --exclude node_modules,build,public/vendor,vendor --reporter=unix
+
+src/activitypub/actors.js:125:51: This function's cyclomatic complexity is too high. (23)
+
+src/activitypub/contexts.js:56:28: This function's cyclomatic complexity is too high. (22)
+
+src/activitypub/helpers.js:455:37: This function's cyclomatic complexity is too high. (16)
+
+src/activitypub/inbox.js:77:23: This function's cyclomatic complexity is too high. (18)
+src/activitypub/inbox.js:319:9: Expected a 'break' statement before 'case'.
+src/activitypub/inbox.js:264:25: This function has too many statements. (56)
+src/activitypub/inbox.js:264:25: This function's cyclomatic complexity is too high. (23)
+src/activitypub/inbox.js:469:81: Expected '{' and instead saw 'return'.
+src/activitypub/inbox.js:482:79: Expected '{' and instead saw 'return'.
+src/activitypub/inbox.js:495:21: This function's cyclomatic complexity is too high. (19)
+
+src/activitypub/mocks.js:43:27: This function's cyclomatic complexity is too high. (22)
+src/activitypub/mocks.js:167:58: This function's cyclomatic complexity is too high. (17)
+src/activitypub/mocks.js:581:29: This function has too many statements. (78)
+src/activitypub/mocks.js:581:29: This function's cyclomatic complexity is too high. (25)
+
+src/activitypub/notes.js:48:23: This function has too many statements. (87)
+src/activitypub/notes.js:48:23: This function's cyclomatic complexity is too high. (47)
+src/activitypub/notes.js:258:30: This function's cyclomatic complexity is too high. (18)
+
+src/analytics.js:35:30: Expected '{' and instead saw 'return'.
+
+src/api/categories.js:174:35: Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. (cids)
+
+src/api/groups.js:122:33: This function's cyclomatic complexity is too high. (20)
+
+src/api/posts.js:96:32: This function's cyclomatic complexity is too high. (21)
+
+src/api/users.js:690:33: Confusing use of '!'.
+
+src/batch.js:13:43: This function's cyclomatic complexity is too high. (28)
+
+src/categories/create.js:15:40: This function's cyclomatic complexity is too high. (18)
+
+src/categories/icon.js:7:9: Expected an identifier and instead saw 'default' (a reserved word).
+
+src/categories/watch.js:17:13: Confusing use of '!'.
+src/categories/watch.js:25:48: Confusing use of '!'.
+
+src/cli/upgrade-plugins.js:3:7: Redefinition of 'prompt'.
+
+src/cli/user.js:3:18: Redefinition of 'Option'.
+
+src/controllers/accounts/chats.js:12:38: This function's cyclomatic complexity is too high. (16)
+src/controllers/accounts/chats.js:107:9: Confusing use of '!'.
+
+src/controllers/accounts/helpers.js:25:48: This function has too many statements. (71)
+src/controllers/accounts/helpers.js:25:48: This function's cyclomatic complexity is too high. (35)
+
+src/controllers/accounts/settings.js:267:2: Unnecessary semicolon.
+
+src/controllers/activitypub/actors.js:122:31: This function's cyclomatic complexity is too high. (16)
+
+src/controllers/admin/dashboard.js:232:17: Expected '{' and instead saw 'return'.
+
+src/controllers/api.js:27:43: This function's cyclomatic complexity is too high. (49)
+
+src/controllers/authentication.js:76:52: This function's cyclomatic complexity is too high. (16)
+
+src/controllers/category.js:28:41: This function has too many statements. (80)
+src/controllers/category.js:28:41: This function's cyclomatic complexity is too high. (38)
+
+src/controllers/errors.js:43:67: 'next' is defined but never used.
+
+src/controllers/helpers.js:485:75: Expected a 'break' statement before 'case'.
+src/controllers/helpers.js:450:36: This function's cyclomatic complexity is too high. (17)
+
+src/controllers/mods.js:22:44: This function's cyclomatic complexity is too high. (21)
+
+src/controllers/search.js:22:42: This function's cyclomatic complexity is too high. (41)
+
+src/controllers/topics.js:25:47: This function has too many statements. (69)
+src/controllers/topics.js:25:47: This function's cyclomatic complexity is too high. (47)
+src/controllers/topics.js:211:23: This function's cyclomatic complexity is too high. (16)
+
+src/database/index.js:48:22: Expected '{' and instead saw 'reject'.
+src/database/index.js:49:18: Expected '{' and instead saw 'resolve'.
+
+src/database/mongo/sorted/intersect.js:143:67: Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. (module)
+
+src/database/mongo/sorted.js:34:37: This function has too many parameters. (7)
+src/database/mongo/sorted.js:34:37: This function's cyclomatic complexity is too high. (24)
+src/database/mongo/sorted.js:138:44: This function has too many parameters. (7)
+src/database/mongo/sorted.js:569:46: This function's cyclomatic complexity is too high. (19)
+src/database/mongo/sorted.js:6:27: This function has too many statements. (52)
+
+src/database/mongo.js:8:7: Redefinition of 'prompt'.
+
+src/database/postgres/sorted.js:106:44: This function has too many parameters. (7)
+src/database/postgres/sorted.js:720:46: This function's cyclomatic complexity is too high. (17)
+
+src/database/redis/connection.js:42:13: Confusing use of '!'.
+
+src/database/redis/sorted.js:29:34: This function has too many parameters. (7)
+src/database/redis/sorted.js:60:23: This function has too many parameters. (7)
+src/database/redis/sorted.js:94:41: This function has too many parameters. (7)
+src/database/redis/sorted.js:289:32: This function has too many parameters. (7)
+
+src/emailer.js:221:23: This function's cyclomatic complexity is too high. (19)
+
+src/flags.js:277:33: This function's cyclomatic complexity is too high. (17)
+src/flags.js:394:31: This function has too many parameters. (7)
+src/flags.js:563:34: This function has too many parameters. (8)
+src/flags.js:902:17: Confusing use of '!'.
+
+src/groups/create.js:9:36: This function's cyclomatic complexity is too high. (20)
+
+src/groups/ownership.js:11:13: Confusing use of '!'.
+
+src/groups/update.js:16:36: This function's cyclomatic complexity is too high. (23)
+
+src/install.js:6:7: Redefinition of 'prompt'.
+src/install.js:50:27: This function's cyclomatic complexity is too high. (17)
+src/install.js:606:50: Expected '{' and instead saw 'return'.
+src/install.js:630:47: Expected '{' and instead saw 'await'.
+
+src/messaging/index.js:337:35: This function's cyclomatic complexity is too high. (16)
+
+src/messaging/rooms.js:237:13: Confusing use of '!'.
+src/messaging/rooms.js:457:33: This function's cyclomatic complexity is too high. (17)
+
+src/messaging/unread.js:9:13: Confusing use of '!'.
+
+src/meta/configs.js:21:34: This function's cyclomatic complexity is too high. (17)
+src/meta/configs.js:192:13: Confusing use of '!'.
+
+src/meta/css.js:16:7: Redefinition of 'CSS'.
+
+src/meta/errors.js:7:9: Redefinition of 'setTimeout'.
+
+src/meta/tags.js:16:21: This function's cyclomatic complexity is too high. (22)
+
+src/middleware/render.js:150:46: This function's cyclomatic complexity is too high. (34)
+src/middleware/render.js:321:26: Expected '{' and instead saw 'reject'.
+src/middleware/render.js:322:22: Expected '{' and instead saw 'resolve'.
+
+src/notifications.js:345:9: Confusing use of '!'.
+src/notifications.js:362:49: Confusing use of '!'.
+src/notifications.js:454:34: This function's cyclomatic complexity is too high. (24)
+
+src/plugins/hooks.js:90:29: This function's cyclomatic complexity is too high. (16)
+src/plugins/hooks.js:136:22: Expected '{' and instead saw 'reject'.
+src/plugins/hooks.js:136:40: Expected '{' and instead saw '_resolve'.
+
+src/posts/create.js:15:35: This function's cyclomatic complexity is too high. (22)
+
+src/posts/profanity.js:1470:13: This function has too many statements. (74)
+
+src/privileges/helpers.js:209:22: Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. (privileges)
+
+src/privileges/posts.js:123:37: This function's cyclomatic complexity is too high. (20)
+
+src/privileges/topics.js:17:34: This function's cyclomatic complexity is too high. (35)
+
+src/request.js:31:23: 'AbortSignal' is not defined.
+
+src/routes/admin.js:5:27: This function has too many statements. (54)
+
+src/routes/write/users.js:11:10: 'guestRoutes' is defined but never used.
+
+src/sanitizer/index.js:16:25: Expected '{' and instead saw 'return'.
+src/sanitizer/index.js:38:27: Expected '{' and instead saw 'out'.
+
+src/settings.js:138:27: Expected '!==' and instead saw '!='.
+src/settings.js:147:35: Expected '!==' and instead saw '!='.
+src/settings.js:194:15: Expected '===' and instead saw '=='.
+
+src/socket.io/categories.js:145:31: Confusing use of '!'.
+
+src/socket.io/meta.js:30:41: This function's cyclomatic complexity is too high. (16)
+
+src/socket.io/modules.js:115:9: Confusing use of '!'.
+
+src/socket.io/posts/tools.js:16:48: This function's cyclomatic complexity is too high. (16)
+
+src/tldr.js:3:7: Redefinition of 'fetch'.
+src/tldr.js:8:39: This function's cyclomatic complexity is too high. (24)
+
+src/topics/create.js:83:34: This function's cyclomatic complexity is too high. (22)
+
+src/topics/data.js:94:21: This function's cyclomatic complexity is too high. (17)
+
+src/topics/follow.js:38:13: Confusing use of '!'.
+
+src/topics/posts.js:166:34: This function's cyclomatic complexity is too high. (18)
+
+src/topics/tags.js:572:13: Confusing use of '!'.
+src/topics/tags.js:584:13: Confusing use of '!'.
+
+src/topics/tools.js:26:32: This function's cyclomatic complexity is too high. (16)
+
+src/topics/unread.js:206:13: Confusing use of '!'.
+src/topics/unread.js:262:45: Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. (params)
+src/topics/unread.js:351:13: Confusing use of '!'.
+
+src/user/admin.js:17:13: Confusing use of '!'.
+
+src/user/auth.js:15:13: Confusing use of '!'.
+src/user/auth.js:41:13: Confusing use of '!'.
+src/user/auth.js:103:13: Confusing use of '!'.
+
+src/user/categories.js:47:13: Confusing use of '!'.
+src/user/categories.js:57:13: Confusing use of '!'.
+src/user/categories.js:69:13: Confusing use of '!'.
+src/user/categories.js:88:13: Confusing use of '!'.
+
+src/user/data.js:226:24: This function's cyclomatic complexity is too high. (38)
+
+src/user/email.js:219:9: Confusing use of '!'.
+
+src/user/index.js:213:9: Confusing use of '!'.
+
+src/user/interstitials.js:49:26: This function's cyclomatic complexity is too high. (25)
+
+src/user/online.js:11:36: Confusing use of '!'.
+src/user/online.js:23:13: Confusing use of '!'.
+
+src/user/posts.js:134:33: Confusing use of '!'.
+
+src/user/profile.js:95:25: This function's cyclomatic complexity is too high. (25)
+
+src/user/search.js:29:34: This function's cyclomatic complexity is too high. (27)
+
+src/user/settings.js:116:40: This function's cyclomatic complexity is too high. (21)
+
+src/webserver.js:76:22: Expected '{' and instead saw 'reject'.
+src/webserver.js:77:18: Expected '{' and instead saw 'resolve'.
+src/webserver.js:260:22: This function's cyclomatic complexity is too high. (17)
+src/webserver.js:339:26: Expected '{' and instead saw 'reject'.
+src/webserver.js:339:44: Expected '{' and instead saw 'resolve'.
+
+public/src/admin/dashboard.js:129:18: Expected '{' and instead saw 'r'.
+public/src/admin/dashboard.js:130:21: Expected '{' and instead saw 'r'.
+public/src/admin/dashboard.js:134:18: Expected '{' and instead saw 'b'.
+public/src/admin/dashboard.js:135:21: Expected '{' and instead saw 'b'.
+public/src/admin/dashboard.js:139:18: Expected '{' and instead saw 'g'.
+public/src/admin/dashboard.js:140:21: Expected '{' and instead saw 'g'.
+
+public/src/admin/manage/categories.js:11:13: This function has too many parameters. (7)
+public/src/admin/manage/categories.js:207:27: Expected '!==' and instead saw '!='.
+
+public/src/admin/manage/category.js:12:13: This function has too many parameters. (8)
+
+public/src/admin/manage/group.js:14:13: This function has too many parameters. (10)
+
+public/src/admin/manage/privileges.js:13:13: This function has too many parameters. (9)
+
+public/src/admin/manage/users.js:5:13: This function has too many parameters. (10)
+public/src/admin/manage/users.js:568:27: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+
+public/src/admin/modules/search.js:85:125: 'escape' is not defined.
+public/src/admin/modules/search.js:160:91: 'escape' is not defined.
+
+public/src/admin/settings/navigation.js:57:32: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+public/src/admin/settings/navigation.js:157:25: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+public/src/admin/settings/navigation.js:164:23: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+
+public/src/ajaxify.js:48:95: Script URL.
+public/src/ajaxify.js:59:76: Script URL.
+public/src/ajaxify.js:27:22: This function's cyclomatic complexity is too high. (16)
+public/src/ajaxify.js:207:25: This function's cyclomatic complexity is too high. (17)
+public/src/ajaxify.js:517:52: The Function constructor is a form of eval.
+public/src/ajaxify.js:587:38: This function's cyclomatic complexity is too high. (16)
+
+public/src/app.js:114:21: This function has too many parameters. (9)
+public/src/app.js:125:13: 'overrides' is not defined.
+public/src/app.js:269:9: 'overrides' is not defined.
+
+public/src/client/account/edit.js:12:13: This function has too many parameters. (8)
+
+public/src/client/account/header.js:15:13: This function has too many parameters. (10)
+public/src/client/account/header.js:135:26: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+
+public/src/client/category.js:14:13: This function has too many parameters. (10)
+
+public/src/client/chats/messages.js:7:13: This function has too many parameters. (8)
+
+public/src/client/chats.js:21:13: This function has too many parameters. (16)
+public/src/client/chats.js:640:14: 'self' is not defined.
+
+public/src/client/flags/detail.js:5:13: This function has too many parameters. (8)
+public/src/client/flags/detail.js:20:53: Expected a 'break' statement before 'case'.
+public/src/client/flags/detail.js:13:67: This function's cyclomatic complexity is too high. (20)
+
+public/src/client/groups/details.js:15:13: This function has too many parameters. (11)
+public/src/client/groups/details.js:72:59: This function's cyclomatic complexity is too high. (20)
+
+public/src/client/header/unread.js:14:27: This function's cyclomatic complexity is too high. (20)
+
+public/src/client/infinitescroll.js:40:22: This function's cyclomatic complexity is too high. (16)
+
+public/src/client/post-queue.js:7:13: This function has too many parameters. (7)
+public/src/client/post-queue.js:173:26: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+public/src/client/post-queue.js:174:26: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+
+public/src/client/search.js:13:13: This function has too many parameters. (8)
+public/src/client/search.js:150:25: This function's cyclomatic complexity is too high. (18)
+
+public/src/client/tag.js:5:13: This function has too many parameters. (7)
+
+public/src/client/topic/events.js:14:13: This function has too many parameters. (8)
+
+public/src/client/topic/merge.js:88:27: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+
+public/src/client/topic/postTools.js:15:13: This function has too many parameters. (10)
+
+public/src/client/topic/posts.js:14:13: This function has too many parameters. (9)
+public/src/client/topic/posts.js:62:32: This function's cyclomatic complexity is too high. (16)
+
+public/src/client/topic/threadTools.js:15:13: This function has too many parameters. (10)
+
+public/src/client/topic/votes.js:6:13: This function has too many parameters. (7)
+public/src/client/topic/votes.js:36:25: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+public/src/client/topic/votes.js:38:55: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+public/src/client/topic/votes.js:47:25: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+public/src/client/topic/votes.js:51:55: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+
+public/src/client/topic.js:21:13: This function has too many parameters. (16)
+
+public/src/client/unread.js:6:13: This function has too many parameters. (7)
+
+public/src/client/world.js:3:102: This function has too many parameters. (7)
+public/src/client/world.js:102:13: 'visibility' was used before it was defined.
+
+public/src/installer/install.js:3:7: Redefinition of '$'.
+
+public/src/modules/ace-editor.js:15:1: 'ace' is not defined.
+public/src/modules/ace-editor.js:16:1: 'ace' is not defined.
+public/src/modules/ace-editor.js:17:1: 'ace' is not defined.
+
+public/src/modules/api.js:34:19: This function's cyclomatic complexity is too high. (16)
+
+public/src/modules/chat.js:5:13: This function has too many parameters. (8)
+
+public/src/modules/helpers.common.js:303:23: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+
+public/src/modules/navigator.js:5:13: This function has too many statements. (55)
+
+public/src/modules/postSelect.js:23:30: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+public/src/modules/postSelect.js:25:48: If a strict mode function is executed using function invocation, its 'this' value will be undefined.
+
+public/src/modules/quickreply.js:6:13: This function has too many parameters. (8)
+
+public/src/modules/settings/array.js:118:93: Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. (element)
+public/src/modules/settings/array.js:132:59: Expected '===' and instead saw '=='.
+
+public/src/modules/settings/checkbox.js:21:25: Expected '===' and instead saw '=='.
+
+public/src/modules/settings/key.js:105:26: This function's cyclomatic complexity is too high. (18)
+public/src/modules/settings/key.js:153:29: Expected '!==' and instead saw '!='.
+public/src/modules/settings/key.js:175:31: Expected '!==' and instead saw '!='.
+public/src/modules/settings/key.js:218:37: Expected '!==' and instead saw '!='.
+public/src/modules/settings/key.js:221:40: Expected '!==' and instead saw '!='.
+public/src/modules/settings/key.js:231:19: Expected '!==' and instead saw '!='.
+
+public/src/modules/settings/object.js:16:38: This function has too many parameters. (7)
+public/src/modules/settings/object.js:93:25: Functions declared within loops referencing an outer scoped variable may lead to confusing semantics. (element)
+public/src/modules/settings/object.js:107:59: Expected '===' and instead saw '=='.
+
+public/src/modules/settings/select.js:30:27: Expected '!==' and instead saw '!='.
+
+public/src/modules/settings/textarea.js:15:33: Expected '!==' and instead saw '!='.
+public/src/modules/settings/textarea.js:23:29: Expected '===' and instead saw '=='.
+
+public/src/modules/settings.js:19:22: Expected '===' and instead saw '=='.
+public/src/modules/settings.js:62:24: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:72:24: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:86:24: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:89:28: Expected '===' and instead saw '=='.
+public/src/modules/settings.js:92:28: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:116:35: Confusing use of '!'.
+public/src/modules/settings.js:122:39: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:146:24: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:149:25: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:152:40: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:156:33: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:159:59: Expected '===' and instead saw '=='.
+public/src/modules/settings.js:173:24: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:184:32: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:208:28: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:213:41: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:234:26: Expected '===' and instead saw '=='.
+public/src/modules/settings.js:285:28: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:285:50: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:329:11: 'Settings' was used before it was defined.
+public/src/modules/settings.js:339:32: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:350:25: Expected '===' and instead saw '=='.
+public/src/modules/settings.js:360:46: Expected '===' and instead saw '=='.
+public/src/modules/settings.js:374:26: Expected '===' and instead saw '=='.
+public/src/modules/settings.js:418:26: Expected '===' and instead saw '=='.
+public/src/modules/settings.js:430:49: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:435:33: Expected '!==' and instead saw '!='.
+public/src/modules/settings.js:436:33: Expected '!==' and instead saw '!='.
+
+public/src/modules/topicList.js:11:13: This function has too many parameters. (7)
+
+public/src/modules/translator.common.js:49:60: This function has too many statements. (64)
+public/src/modules/translator.common.js:49:60: This function's cyclomatic complexity is too high. (29)
+public/src/modules/translator.common.js:293:53: Expected '{' and instead saw 'return'.
+
+public/src/overrides.js:89:5: 'overrides' is not defined.
+public/src/overrides.js:98:5: 'overrides' is not defined.
+public/src/overrides.js:103:9: 'overrides' is not defined.
+
+public/src/service-worker.js:3:1: 'self' is not defined.
+public/src/service-worker.js:5:5: 'self' is not defined.
+public/src/service-worker.js:8:1: 'self' is not defined.
+public/src/service-worker.js:10:21: 'self' is not defined.
+public/src/service-worker.js:13:1: 'self' is not defined.
+public/src/service-worker.js:22:23: 'caches' is not defined.
+
+public/src/sockets.js:4:7: Redefinition of '$'.
+public/src/sockets.js:6:9: Redefinition of 'alert'.
+public/src/sockets.js:39:26: Expected '{' and instead saw 'reject'.
+public/src/sockets.js:40:22: Expected '{' and instead saw 'resolve'.
+
+public/src/utils.common.js:500:19: Expected '===' and instead saw '=='.
+public/src/utils.common.js:519:121: Confusing use of '!'.
+public/src/utils.common.js:654:21: Expected '===' and instead saw '=='.
+
+public/src/utils.js:4:7: Redefinition of '$'.
+
+public/src/widgets.js:10:32: This function's cyclomatic complexity is too high. (16)
+
+285 errors
