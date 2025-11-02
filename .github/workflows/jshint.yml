@@ -33,9 +33,7 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
-        with:
-          useLockFile: false
+        run: npm install --no-package-lock
 
       - name: Run JSHint
         run: npm run jshint
