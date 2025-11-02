@@ -264,4 +264,4 @@ async function getChatAllowDenyList(userData) {
 
 	userData.settings.chatAllowListUsers = chatAllowListUsers;
 	userData.settings.chatDenyListUsers = chatDenyListUsers;
-};
+}

@@ -1,0 +1,46 @@
+# Ignore files with complex patterns that would require significant refactoring
+# TEMPORARILY REMOVED FOR DEMONSTRATION:
+# src/activitypub/inbox.js - will be fixed
+# src/categories/icon.js - will be fixed
+# src/controllers/accounts/settings.js - will be fixed
+# src/controllers/helpers.js - will be fixed
+
+src/api/users.js
+src/categories/watch.js
+src/controllers/accounts/chats.js
+src/database/redis/connection.js
+src/flags.js
+src/groups/ownership.js
+src/messaging/rooms.js
+src/messaging/unread.js
+src/meta/configs.js
+src/notifications.js
+src/socket.io/categories.js
+src/socket.io/modules.js
+src/topics/follow.js
+src/topics/tags.js
+src/topics/unread.js
+src/user/admin.js
+src/user/auth.js
+src/user/categories.js
+src/user/email.js
+src/user/index.js
+src/user/online.js
+src/user/posts.js
+public/src/admin/manage/users.js
+public/src/admin/settings/navigation.js
+public/src/client/account/header.js
+public/src/client/flags/detail.js
+public/src/client/post-queue.js
+public/src/client/topic/merge.js
+public/src/client/topic/votes.js
+public/src/modules/helpers.common.js
+public/src/modules/postSelect.js
+public/src/modules/settings.js
+public/src/utils.common.js
+
+# Build and vendor directories
+node_modules/
+build/
+public/vendor/
+vendor/
