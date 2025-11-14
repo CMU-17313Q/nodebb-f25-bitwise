@@ -18,7 +18,7 @@ translatorApi.translate = async function (postData) {
 		return [data.is_english, data.translated_content];
 	} catch (error) {
 		// If the service is unavailable or there's an error, assume it's English and return original content
-		console.error('Translation service error:', error);
+		console.error('Translation service error:', error.message);
 		return [true, ''];
 	}
 };
